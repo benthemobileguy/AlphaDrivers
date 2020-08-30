@@ -1,0 +1,89 @@
+import 'package:alpha_drivers/animations/route_animations/slide_from_left_page_route.dart';
+import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/screens/sign-in-page.dart';
+import 'package:alpha_drivers/screens/sign-up-page.dart';
+import 'package:alpha_drivers/theme/style.dart';
+import 'package:flutter/material.dart';
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'ALPHA TAXI',
+      home: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/bg_welcome.png"), fit: BoxFit.cover)),
+        child: Scaffold(
+          backgroundColor: Colors.black.withOpacity(0.3),
+          body:  Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "ALPHA\nTAXI",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: 'CircularStd',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Spacer(
+
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomCircularButtonMain(
+                  isLoading: false,
+                    backgroundColor: primaryColor,
+                    fontWeight: FontWeight.w700,
+                    textColor: Colors.white,
+                    text: "Sign In",
+                    onPressed: (){
+                      Navigator.push(
+                          context, SlideFromLeftPageRoute(widget:
+                      SignInPage()));
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomCircularButtonMain(
+                    onPressed: (){
+                      Navigator.pushReplacement(
+                          context, SlideFromLeftPageRoute(widget:
+                      SignUpPage()));
+                    },
+                    isLoading: false,
+                    backgroundColor: Colors.transparent,
+                    fontWeight: FontWeight.w700,
+                    textColor: Colors.white,
+                    text: "Sign Up",
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                )
+              ],
+            ),
+          ),
+
+        ),
+      ),
+    );
+  }
+}
