@@ -1,8 +1,10 @@
 import 'package:alpha_drivers/animations/fade-animations.dart';
+import 'package:alpha_drivers/animations/route_animations/slide_from_left_page_route.dart';
 import 'package:alpha_drivers/animations/route_animations/slide_from_right_page_route.dart';
 import 'package:alpha_drivers/screens/home-page.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/components/default-text-form-field.dart';
+import 'package:alpha_drivers/screens/sign-up-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/network-utils.dart';
 import 'package:email_validator/email_validator.dart';
@@ -169,7 +171,22 @@ class _SignInPageState extends State<SignInPage> {
                       text: "Sign In",
                       backgroundColor: Colors.white,
                       textColor: primaryColor,
-                    )
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomCircularButtonMain(
+                      onPressed: (){
+                        Navigator.pushReplacement(
+                            context, SlideFromLeftPageRoute(widget:
+                        SignUpPage()));
+                      },
+                      isLoading: false,
+                      backgroundColor: Colors.transparent,
+                      fontWeight: FontWeight.w700,
+                      textColor: Colors.white,
+                      text: "Sign Up",
+                    ),
                   ],
                 ),
               ),
