@@ -1,10 +1,10 @@
-import 'package:alpha_drivers/animations/fade-animations.dart';
 import 'package:alpha_drivers/screens/components/show-image-picker.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mdi/mdi.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'components/default-text-form-field.dart';
@@ -24,6 +24,9 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
   TextEditingController _vehicleNameController = new TextEditingController();
   TextEditingController _vehiclePhotoController = new TextEditingController();
   final PageController _pageController = PageController(initialPage: 0);
+  final picker = ImagePicker();
+  PickedFile _image;
+  ProgressDialog pr;
   bool _showPassword = false;
   int pagePos = 0;
   final _formKey1 = GlobalKey<FormState>();
@@ -491,5 +494,14 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
       Navigator.pop(context);
       pr.show();
     }
+  }
+
+  void getImageFromGallery() {
+
+  }
+
+  void uploadtoCloudinary(PickedFile image) {
+
+
   }
 }
