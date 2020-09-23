@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:alpha_drivers/bloc/default.dart';
+import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/style.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _listenForPermissionStatus();
     _getUserLocation();
+    HelperMethods.getCurrentUserInfo();
   }
   @override
   void didChangeDependencies() {

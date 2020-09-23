@@ -1,8 +1,11 @@
 import 'package:alpha_drivers/animations/route_animations/slide_from_left_page_route.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/screens/home-page.dart';
+import 'package:alpha_drivers/screens/register-driver.dart';
 import 'package:alpha_drivers/screens/sign-in-page.dart';
 import 'package:alpha_drivers/screens/sign-up-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -10,6 +13,12 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUser();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,5 +94,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
     );
+  }
+
+  void getUser() async{
+   FirebaseUser currentFirebaseUser = await FirebaseAuth.instance.currentUser();
+    if(currentFirebaseUser!=null){
+      Navigator.pushReplacement(
+          context, SlideFromLeftPageRoute(widget:
+      RegisterDriverPage()));
+    }
   }
 }

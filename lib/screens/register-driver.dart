@@ -18,13 +18,18 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
   TextEditingController _bvnController = new TextEditingController();
   TextEditingController _acctHolderName = new TextEditingController();
   TextEditingController _acctNumberController = new TextEditingController();
+  TextEditingController _plateNumberController = new TextEditingController();
+  TextEditingController _vehicleColorController = new TextEditingController();
+  TextEditingController _vehicleNameController = new TextEditingController();
+  TextEditingController _vehiclePhotoController = new TextEditingController();
   final PageController _pageController = PageController(initialPage: 0);
   bool _showPassword = false;
+  int pagePos = 0;
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-  final _formKey3 = GlobalKey<FormState>();
-  final _formKey4 = GlobalKey<FormState>();
-  final _formKey5 = GlobalKey<FormState>();
+  // final _formKey3 = GlobalKey<FormState>();
+  // final _formKey4 = GlobalKey<FormState>();
+  // final _formKey5 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +42,11 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
               children: <Widget>[
                 Expanded(
                   child: PageView(
+                    onPageChanged: (int page) {
+                      setState(() {
+                        pagePos = page;
+                      });
+                    },
                   physics: NeverScrollableScrollPhysics(),
                     controller: _pageController,
                     children: <Widget>[
@@ -115,13 +125,12 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (!EmailValidator.validate(
-                                                            value.trim())) {
-                                                          return 'Please enter a valid email';
+                                                        if (value.isNotEmpty) {
+                                                          return 'Field is empty';
                                                         }
                                                         return null;
                                                       },
-                                                      controller: _acctNumberController,
+                                                      controller: _acctHolderName,
                                                       prefixIcon: Icon(
                                                         Mdi.account,
                                                         color: Colors.grey,
@@ -135,6 +144,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         left: 20,
                                                         right: 20),
                                                     child: DefaultTextFormField(
+                                                      keyboardType: TextInputType.number,
                                                       textColor: Colors.white,
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
@@ -143,7 +153,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         }
                                                         return null;
                                                       },
-                                                      controller: _acctHolderName,
+                                                      controller: _acctNumberController,
                                                       prefixIcon: Icon(
                                                         Mdi.accountDetails,
                                                         color: Colors.grey,
@@ -177,20 +187,6 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                   height: 30,
                                                 )
                                               ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 17, right: 17),
-                                          child: Text(
-                                            "By continuing, I confirm that i have read & agree to the "
-                                                "Terms & conditions and Privacy policy",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.5,
-                                              fontFamily: 'CircularStd',
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.w700,
                                             ),
                                           ),
                                         ),
@@ -222,7 +218,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                         Align(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            "Bank Details",
+                                            "Vehicle Information",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 20.0,
@@ -260,58 +256,12 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         }
                                                         return null;
                                                       },
-                                                      controller: _bankController,
+                                                      controller: _vehicleNameController,
                                                       prefixIcon: Icon(
-                                                        Mdi.bank,
+                                                        Mdi.car,
                                                         color: Colors.grey,
                                                       ),
-                                                      hintText: "Bank Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (!EmailValidator.validate(
-                                                            value.trim())) {
-                                                          return 'Please enter a valid email';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctNumberController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.account,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Holder's Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctHolderName,
-                                                      prefixIcon: Icon(
-                                                        Mdi.accountDetails,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Number",
+                                                      hintText: "Name of Vehicle",
                                                     )),
                                                 Padding(
                                                     padding: const EdgeInsets.only(
@@ -329,12 +279,60 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         }
                                                         return null;
                                                       },
-                                                      controller: _bvnController,
+                                                      controller: _vehicleColorController,
                                                       prefixIcon: Icon(
-                                                        Mdi.finance,
+                                                        Mdi.selectColor,
                                                         color: Colors.grey,
                                                       ),
-                                                      hintText: "BVN",
+                                                      hintText: "Vehicle Color",
+                                                    )),
+                                                Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 20,
+                                                        bottom: 10,
+                                                        left: 20,
+                                                        right: 20),
+                                                    child: DefaultTextFormField(
+                                                      textColor: Colors.white,
+                                                      keyboardType: TextInputType.number,
+                                                      underlineColor: HexColor("#1FCD6C"),
+                                                      fillColorCode: "#0D1724",
+                                                      validator: (value) {
+                                                        if (value.isNotEmpty) {
+                                                          return 'Field is empty';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      controller: _plateNumberController,
+                                                      prefixIcon: Icon(
+                                                        Mdi.car,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      hintText: "Plate Number",
+                                                    )),
+                                                Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 20,
+                                                        bottom: 10,
+                                                        left: 20,
+                                                        right: 20),
+                                                    child: DefaultTextFormField(
+                                                      textColor: Colors.white,
+                                                      disabled: true,
+                                                      underlineColor: HexColor("#1FCD6C"),
+                                                      fillColorCode: "#0D1724",
+                                                      validator: (value) {
+                                                        if (value.isNotEmpty) {
+                                                          return 'Field is empty';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      controller: _vehiclePhotoController,
+                                                      prefixIcon: Icon(
+                                                        Mdi.carConnected,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      hintText: "Vehicle Photo",
                                                     )),
                                                 SizedBox(
                                                   height: 30,
@@ -343,21 +341,21 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 17, right: 17),
-                                          child: Text(
-                                            "By continuing, I confirm that i have read & agree to the "
-                                                "Terms & conditions and Privacy policy",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.5,
-                                              fontFamily: 'CircularStd',
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
                                       ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 17, right: 17),
+                                  child: Text(
+                                    "By continuing, I confirm that i have read & agree to the "
+                                        "Terms & conditions and Privacy policy",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12.5,
+                                      fontFamily: 'CircularStd',
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
@@ -366,496 +364,6 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                           ),
                         ],
                       ),//Page Two
-                      Stack(
-                        children: <Widget>[
-                          SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 30),
-                                  child: Form(
-                                    autovalidate: false,
-                                    key: _formKey3,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            "Bank Details",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'CircularStd',
-                                              color: Colors.grey.withOpacity(0.7),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: HexColor("#0D1724"),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(20),
-                                                    bottomLeft: Radius.circular(20),
-                                                    bottomRight: Radius.circular(20),
-                                                    topRight: Radius.circular(20))),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bankController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.bank,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Bank Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (!EmailValidator.validate(
-                                                            value.trim())) {
-                                                          return 'Please enter a valid email';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctNumberController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.account,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Holder's Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctHolderName,
-                                                      prefixIcon: Icon(
-                                                        Mdi.accountDetails,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Number",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bvnController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.finance,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "BVN",
-                                                    )),
-                                                SizedBox(
-                                                  height: 30,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 17, right: 17),
-                                          child: Text(
-                                            "By continuing, I confirm that i have read & agree to the "
-                                                "Terms & conditions and Privacy policy",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.5,
-                                              fontFamily: 'CircularStd',
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ), //Page Three
-                      Stack(
-                        children: <Widget>[
-                          SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 30),
-                                  child: Form(
-                                    autovalidate: false,
-                                    key: _formKey4,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            "Bank Details",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'CircularStd',
-                                              color: Colors.grey.withOpacity(0.7),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: HexColor("#0D1724"),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(20),
-                                                    bottomLeft: Radius.circular(20),
-                                                    bottomRight: Radius.circular(20),
-                                                    topRight: Radius.circular(20))),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bankController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.bank,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Bank Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (!EmailValidator.validate(
-                                                            value.trim())) {
-                                                          return 'Please enter a valid email';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctNumberController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.account,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Holder's Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctHolderName,
-                                                      prefixIcon: Icon(
-                                                        Mdi.accountDetails,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Number",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bvnController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.finance,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "BVN",
-                                                    )),
-                                                SizedBox(
-                                                  height: 30,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 17, right: 17),
-                                          child: Text(
-                                            "By continuing, I confirm that i have read & agree to the "
-                                                "Terms & conditions and Privacy policy",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.5,
-                                              fontFamily: 'CircularStd',
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),//Page Four
-                      Stack(
-                        children: <Widget>[
-                          SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 30),
-                                  child: Form(
-                                    autovalidate: false,
-                                    key: _formKey5,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            "Bank Details",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontFamily: 'CircularStd',
-                                              color: Colors.grey.withOpacity(0.7),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: HexColor("#0D1724"),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(20),
-                                                    bottomLeft: Radius.circular(20),
-                                                    bottomRight: Radius.circular(20),
-                                                    topRight: Radius.circular(20))),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bankController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.bank,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Bank Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (!EmailValidator.validate(
-                                                            value.trim())) {
-                                                          return 'Please enter a valid email';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctNumberController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.account,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Holder's Name",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _acctHolderName,
-                                                      prefixIcon: Icon(
-                                                        Mdi.accountDetails,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "Account Number",
-                                                    )),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 10,
-                                                        left: 20,
-                                                        right: 20),
-                                                    child: DefaultTextFormField(
-                                                      textColor: Colors.white,
-                                                      underlineColor: HexColor("#1FCD6C"),
-                                                      fillColorCode: "#0D1724",
-                                                      validator: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          return 'Field is empty';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      controller: _bvnController,
-                                                      prefixIcon: Icon(
-                                                        Mdi.finance,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      hintText: "BVN",
-                                                    )),
-                                                SizedBox(
-                                                  height: 30,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 17, right: 17),
-                                          child: Text(
-                                            "By continuing, I confirm that i have read & agree to the "
-                                                "Terms & conditions and Privacy policy",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.5,
-                                              fontFamily: 'CircularStd',
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )//Page Five
                     ],
                   ),
 
@@ -866,10 +374,29 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                     padding: const EdgeInsets.only(left: 18, right: 18),
                     child: Row(
                       children: <Widget>[
+                        GestureDetector(
+                          onTap: (){
+                            _pageController.previousPage(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.ease,
+                            );
+                          },
+                          child: Text(
+                            "Previous",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'OpenSans',
+                              color: primaryColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
                         Container(
                           child: SmoothPageIndicator(
                             controller: _pageController,
-                            count: 5,
+                            count: 2,
                             effect: ScaleEffect(
                               scale: 1,
                               activeDotColor: primaryColor,
@@ -879,6 +406,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                         Spacer(),
                         GestureDetector(
                           onTap: (){
+                            handlePreviousBtn();
                             _pageController.nextPage(
                               duration: Duration(milliseconds: 500),
                               curve: Curves.ease,
@@ -908,5 +436,9 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
         ),
       ),
     );
+  }
+
+  void handlePreviousBtn() {
+
   }
 }

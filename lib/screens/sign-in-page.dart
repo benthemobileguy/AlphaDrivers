@@ -212,14 +212,16 @@ class _SignInPageState extends State<SignInPage> {
         .signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passController.text.trim())
-        .catchError((e) =>
-    {
+        .catchError((e) => {
       setState(() {
         isLoading = false;
       }),
     NetworkUtils.showToast("Your email or password is incorrect!"),
       print(e.toString())
     }).then((AuthResult auth) {
+      setState(() {
+        isLoading = false;
+      });
       Navigator.push(
           context,
           SlideFromRightPageRoute(
