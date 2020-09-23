@@ -15,6 +15,7 @@ class DefaultTextFormField extends StatelessWidget {
   final TextInputAction textInputAction;
   final Widget suffixIcon;
   final Color textColor;
+  final bool readOnly;
   final bool obscureText, disabled;
   final String initialValue;
   final String fillColorCode;
@@ -25,6 +26,7 @@ class DefaultTextFormField extends StatelessWidget {
   DefaultTextFormField({
     this.onChanged,
     this.textColor,
+    this.readOnly,
     this.underlineColor,
     this.maxLength,
     this.prefixIcon,
@@ -54,6 +56,7 @@ class DefaultTextFormField extends StatelessWidget {
         onChanged: this.onChanged,
         inputFormatters: inputFormatters,
         onTap: onTap,
+        readOnly: readOnly!=null?readOnly:false,
         initialValue: initialValue,
         textAlignVertical: TextAlignVertical.bottom,
         enabled: !disabled,
@@ -71,10 +74,8 @@ class DefaultTextFormField extends StatelessWidget {
           filled: true,
           fillColor: HexColor(fillColorCode),
           contentPadding: EdgeInsets.all(18.0),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey,
-            ),
+          disabledBorder:UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),

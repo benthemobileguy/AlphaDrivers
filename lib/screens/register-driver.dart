@@ -1,4 +1,5 @@
 import 'package:alpha_drivers/animations/fade-animations.dart';
+import 'package:alpha_drivers/screens/components/show-image-picker.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:email_validator/email_validator.dart';
@@ -102,7 +103,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -125,7 +126,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -148,7 +149,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       textColor: Colors.white,
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -171,7 +172,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -251,7 +252,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -274,7 +275,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -298,7 +299,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -318,11 +319,14 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         right: 20),
                                                     child: DefaultTextFormField(
                                                       textColor: Colors.white,
-                                                      disabled: true,
+                                                      readOnly: true,
+                                                      onTap: (){
+                                                       uploadVehiclePhoto();
+                                                      },
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
-                                                        if (value.isNotEmpty) {
+                                                        if (value.isEmpty) {
                                                           return 'Field is empty';
                                                         }
                                                         return null;
@@ -385,7 +389,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                             "Previous",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16.5,
                               fontFamily: 'OpenSans',
                               color: primaryColor,
                               fontWeight: FontWeight.w700,
@@ -406,17 +410,13 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                         Spacer(),
                         GestureDetector(
                           onTap: (){
-                            handlePreviousBtn();
-                            _pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.ease,
-                            );
+                            handleNextBtn();
                           },
                           child: Text(
-                            "Next",
+                            pagePos!=1?"Next":"Complete",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16.5,
                               fontFamily: 'OpenSans',
                               color: primaryColor,
                               fontWeight: FontWeight.w700,
@@ -438,7 +438,58 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
     );
   }
 
-  void handlePreviousBtn() {
+  void handleNextBtn() {
+    if(pagePos==0){
+      if(_formKey1.currentState.validate()){
+        _pageController.nextPage(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.ease,
+        );
+      }
+    } else{
+      if(_formKey2.currentState.validate()){
+        if(_formKey2.currentState.validate()){
+          postDetailsToFirestore();
+        }
+      }
+    }
+  }
 
+  void postDetailsToFirestore() async{
+
+  }
+
+  void uploadVehiclePhoto() {
+    showImagePicker(context, () {
+      getImageFromCamera();
+    }, () {
+      getImageFromGallery();
+    });
+  }
+
+  Future getImageFromCamera() async {
+    var selectedImg = await picker.getImage(source: ImageSource.camera);
+    if (selectedImg != null) {
+      pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+      //Dialog Style
+      pr.style(
+        message: 'Uploading your image...',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(
+          strokeWidth: 3,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.bounceIn,
+        progressTextStyle: TextStyle(color: Color(0xFF1C2447), fontSize: 14.0),
+        messageTextStyle: TextStyle(color: Color(0xFF1C2447), fontSize: 14.0),
+      );
+      setState(() {
+        _image = selectedImg;
+      });
+      uploadtoCloudinary(_image);
+      Navigator.pop(context);
+      pr.show();
+    }
   }
 }
