@@ -1,6 +1,14 @@
+import 'package:alpha_drivers/animations/route_animations/slide_from_left_page_route.dart';
+import 'package:alpha_drivers/model/user.dart';
 import 'package:alpha_drivers/screens/components/show-image-picker.dart';
+import 'package:alpha_drivers/screens/home-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
+import 'package:alpha_drivers/utils/cloudinary.dart';
 import 'package:alpha_drivers/utils/color.dart';
+import 'package:alpha_drivers/utils/network-utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_client/cloudinary_client.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mdi/mdi.dart';
@@ -24,8 +32,10 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
   TextEditingController _vehicleNameController = new TextEditingController();
   TextEditingController _vehiclePhotoController = new TextEditingController();
   final PageController _pageController = PageController(initialPage: 0);
-  final picker = ImagePicker();
   PickedFile _image;
+  List<String> _images = [];
+  List<String> _paths = [];
+  final picker = ImagePicker();
   ProgressDialog pr;
   bool _showPassword = false;
   int pagePos = 0;
@@ -172,6 +182,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                                                         right: 20),
                                                     child: DefaultTextFormField(
                                                       textColor: Colors.white,
+                                                      keyboardType: TextInputType.number,
                                                       underlineColor: HexColor("#1FCD6C"),
                                                       fillColorCode: "#0D1724",
                                                       validator: (value) {
@@ -458,13 +469,44 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
     }
   }
 
-  void postDetailsToFirestore() async{
+  void postDetailsToFirestore() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final Firestore db = Firestore.instance;
+    final FirebaseUser user = await auth.currentUser();
+    var userRef = db.collection("Vehicles")
+        .document(user.uid);
+    userRef.setData({
+      'user_id': user.uid,
+      "bank_name": _bankController.text,
+      "account_number": _acctNumberController.text,
+      'account_name': _acctNumberController.text,
+      'bvn': _bvnController.text,
+      'vehicle_name': _vehicleNameController.text,
+      'vehicle_color': _vehicleColorController.text,
+      'plate_number': _plateNumberController.text,
+      'vehicle_image': _images[0]
 
+    }).then((doc) {
+      print("doc save successful");
+      Navigator.pushReplacement(
+          context, SlideFromLeftPageRoute(widget:
+      HomePage()));
+      setState(() {
+
+        NetworkUtils.showToast("Request timed out. Please try again");
+      });
+    }).timeout(Duration(seconds:10)).catchError((error) {
+      setState(() {
+
+        NetworkUtils.showToast("Request timed out. Please try again");
+      });
+      print(error);
+    });
   }
 
   void uploadVehiclePhoto() {
     showImagePicker(context, () {
-      getImageFromCamera();
+    getImageFromCamera();
     }, () {
       getImageFromGallery();
     });
@@ -496,12 +538,45 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
     }
   }
 
-  void getImageFromGallery() {
-
+  void uploadtoCloudinary(PickedFile file) async {
+    CloudinaryClient client = new CloudinaryClient(Cloudinary.cloudinaryApiKey,
+        Cloudinary.cloudinarySecret, Cloudinary.cloudName);
+    await client.uploadImage(file.path).then((result) {
+      pr.hide();
+      print(result.secure_url);
+      setState(() {
+        _images.add(result.secure_url.toString());
+        _paths.add(_image.path.split('/').last);
+        _vehiclePhotoController.text = "vehicle.jpg";
+      });
+    }).catchError((error) =>
+        print("ERROR_CLOUDINARY::  $error"));
+    pr.hide();
   }
 
-  void uploadtoCloudinary(PickedFile image) {
-
-
+  Future getImageFromGallery() async {
+    var selectedImg = await picker.getImage(source: ImageSource.gallery);
+    if (selectedImg != null) {
+      pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+      //Dialog Style
+      pr.style(
+        message: 'Uploading your image...',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(
+          strokeWidth: 3,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.bounceIn,
+        progressTextStyle: TextStyle(color: Color(0xFF1C2447), fontSize: 14.0),
+        messageTextStyle: TextStyle(color: Color(0xFF1C2447), fontSize: 14.0),
+      );
+      setState(() {
+        _image = selectedImg;
+      });
+      uploadtoCloudinary(_image);
+      Navigator.pop(context);
+      pr.show();
+    }
   }
 }

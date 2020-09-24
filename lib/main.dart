@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:firebase_core/firebase_core.dart';
