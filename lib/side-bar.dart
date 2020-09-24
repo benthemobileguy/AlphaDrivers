@@ -110,32 +110,30 @@ class NavDrawer extends StatelessWidget {
           onPressed: null,
 
         ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey.withOpacity(0.5),
-                height: 1,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ListTile(
-                    leading: Icon(Mdi.logout,
-                      color: primaryColor,),
-                    title: Text(
-                      "Log out",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: primaryColor,
-                      ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Divider(
+              color: Colors.grey.withOpacity(0.5),
+              height: 1,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ListTile(
+                  leading: Icon(Mdi.logout,
+                    color: primaryColor,),
+                  title: Text(
+                    "Log out",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      fontFamily: 'Montserrat',
+                      color: primaryColor,
                     ),
-                )
-              ),
-            ],
-          ),
+                  ),
+              )
+            ),
+          ],
         ),
       ],
     );

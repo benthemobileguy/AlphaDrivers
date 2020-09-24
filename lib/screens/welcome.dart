@@ -5,6 +5,7 @@ import 'package:alpha_drivers/screens/register-driver.dart';
 import 'package:alpha_drivers/screens/sign-in-page.dart';
 import 'package:alpha_drivers/screens/sign-up-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class WelcomeScreen extends StatefulWidget {
@@ -98,10 +99,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   void getUser() async{
    FirebaseUser currentFirebaseUser = await FirebaseAuth.instance.currentUser();
+
     if(currentFirebaseUser!=null){
-      Navigator.pushReplacement(
-          context, SlideFromLeftPageRoute(widget:
-      RegisterDriverPage()));
+      checkIfDocExists(currentFirebaseUser.uid);
+    }
+  }
+  Future<bool> checkIfDocExists(String userId) async {
+    try {
+      // Get reference to Firestore collection
+      var collectionRef = Firestore.instance.collection('Vehicles').document();
+      if(collectionRef!=null){
+        Navigator.pushReplacement(
+            context, SlideFromLeftPageRoute(widget:
+        HomePage()));
+      } else{
+        Navigator.pushReplacement(
+            context, SlideFromLeftPageRoute(widget:
+        RegisterDriverPage()));
+      }
+    } catch (e) {
+      throw e;
     }
   }
 }

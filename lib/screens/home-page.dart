@@ -5,6 +5,7 @@ import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
+import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,21 +19,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc _mainBloc;
-  String _currentLocation = "Your current location";
+  GoogleMapController mapController;
   TextEditingController textEditingController = new TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
-  static CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664,
-        -122.085749655962),
-    zoom: 14.4746,
-  );
+  Position currentPos;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _listenForPermissionStatus();
-    _getUserLocation();
     HelperMethods.getCurrentUserInfo();
   }
   @override
@@ -62,10 +58,17 @@ class _HomePageState extends State<HomePage> {
               )),
           GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            initialCameraPosition: kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
+              _getUserLocation();
             },
+          ),
+          Container(
+           height: 135,
+            color: Colors.brown,
           ),
           Positioned(
             left: 10,
@@ -130,21 +133,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getUserLocation() async{
-    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    final GoogleMapController controller = await _controller.future;
-    final CameraPosition _kLake = CameraPosition(
-        bearing: 192.8334901395799,
-        target: LatLng(position.latitude, position.longitude),
-        tilt: 59.440717697143555,
-        zoom: 19.151926040649414);
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-
-    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates
-      (position.latitude, position.longitude);
-    setState(() {
-      _currentLocation = placemark[0].thoroughfare;
-
-    });
+    final position = await Geolocator().getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    currentPos = position;
+    mapController = await _controller.future;
+    //create a latlng object to navigate to
+    LatLng pos = LatLng(position.latitude, position.longitude);
+    CameraPosition cameraPosition = new CameraPosition(target: pos, zoom: 14);
+    await mapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
   }
 

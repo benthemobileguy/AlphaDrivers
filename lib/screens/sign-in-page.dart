@@ -4,9 +4,11 @@ import 'package:alpha_drivers/animations/route_animations/slide_from_right_page_
 import 'package:alpha_drivers/screens/home-page.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/components/default-text-form-field.dart';
+import 'package:alpha_drivers/screens/register-driver.dart';
 import 'package:alpha_drivers/screens/sign-up-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/network-utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -219,13 +221,28 @@ class _SignInPageState extends State<SignInPage> {
     NetworkUtils.showToast("Your email or password is incorrect!"),
       print(e.toString())
     }).then((AuthResult auth) {
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.push(
-          context,
-          SlideFromRightPageRoute(
-              widget: HomePage()));
+     checkIfDocExists(auth.user.uid);
+    });
+  }
+  Future<bool> checkIfDocExists(String userId) async {
+    try {
+      // Get reference to Firestore collection
+      var collectionRef = Firestore.instance.collection('Vehicles').document();
+      if(collectionRef!=null){
+
+        Navigator.pushReplacement(
+            context, SlideFromLeftPageRoute(widget:
+        HomePage()));
+      } else{
+        Navigator.pushReplacement(
+            context, SlideFromLeftPageRoute(widget:
+        RegisterDriverPage()));
+      }
+    } catch (e) {
+      throw e;
+    }
+    setState(() {
+      isLoading = false;
     });
   }
 }

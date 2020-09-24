@@ -33,6 +33,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
   TextEditingController _vehiclePhotoController = new TextEditingController();
   final PageController _pageController = PageController(initialPage: 0);
   PickedFile _image;
+  bool isLoading = false;
   List<String> _images = [];
   List<String> _paths = [];
   final picker = ImagePicker();
@@ -426,7 +427,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                           onTap: (){
                             handleNextBtn();
                           },
-                          child: Text(
+                          child: !isLoading?Text(
                             pagePos!=1?"Next":"Complete",
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -435,6 +436,11 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
                               color: primaryColor,
                               fontWeight: FontWeight.w700,
                             ),
+                          ):SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(backgroundColor:
+                            primaryColor,),
                           ),
                         ),
                       ],
@@ -470,6 +476,9 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
   }
 
   void postDetailsToFirestore() async {
+    setState(() {
+      isLoading = true;
+    });
     final FirebaseAuth auth = FirebaseAuth.instance;
     final Firestore db = Firestore.instance;
     final FirebaseUser user = await auth.currentUser();
@@ -492,12 +501,11 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
           context, SlideFromLeftPageRoute(widget:
       HomePage()));
       setState(() {
-
-        NetworkUtils.showToast("Request timed out. Please try again");
+        isLoading = true;
       });
     }).timeout(Duration(seconds:10)).catchError((error) {
       setState(() {
-
+        isLoading = true;
         NetworkUtils.showToast("Request timed out. Please try again");
       });
       print(error);
