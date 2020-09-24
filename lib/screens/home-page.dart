@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/model/location.dart';
+import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
@@ -57,6 +58,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[],
               )),
           GoogleMap(
+            padding: EdgeInsets.only(top:135),
             mapType: MapType.normal,
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
@@ -69,6 +71,29 @@ class _HomePageState extends State<HomePage> {
           Container(
            height: 135,
             color: Colors.brown,
+          ),//Container
+          Positioned(
+            top: 40,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width:250,
+                  child: CustomCircularButtonMain(
+                    backgroundColor: Colors.white,
+                    isLoading: false,
+                    text: 'GO ONLINE',
+                    fontWeight: FontWeight.w700,
+                    textColor: Colors.brown,
+                    onPressed: (){
+
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
           Positioned(
             left: 10,
