@@ -3,7 +3,7 @@ import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
-import 'package:alpha_drivers/screens/custom-sheet.dart';
+import 'package:alpha_drivers/screens/confirm-sheet.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/theme/style.dart';
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   Position currentPos;
 
   var availabilityText = 'GO ONLINE';
-  Color availabilityColor = BrandColors.colorOrange;
+  Color availabilityColor = Colors.white;
 
   bool isAvailable = false;
   @override
@@ -94,17 +94,34 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: 250,
                   child: CustomCircularButtonMain(
-                    backgroundColor: Colors.white,
+                    backgroundColor: availabilityColor,
                     isLoading: false,
                     text: availabilityText,
                     fontWeight: FontWeight.w700,
                     textColor: Colors.brown,
                     onPressed: () {
-                      // goOnline();
-                      // getLocationUpdates();
                       showModalBottomSheet(context: context,
                           isDismissible: false,
-                          builder: (BuildContext context) => ConfirmSheet());
+                          builder: (BuildContext context) =>
+                              ConfirmSheet(
+                                title: (!isAvailable) ? 'GO ONLINE': 'GO OFFLINE',
+                                subtitle: (!isAvailable) ? 'You are about to become available to receive trip requests'
+                                : 'You will stop receiving trip requests',
+                                onPressed: (){
+                                  if(!isAvailable){
+                                    goOnline();
+                                    getLocationUpdates();
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      availabilityColor = Colors.white;
+                                      availabilityText = 'GO OFFLINE';
+                                      isAvailable = true;
+                                    });
+                                  } else{
+
+                                  }
+                                },
+                              ));
 
                     },
                   ),

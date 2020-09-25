@@ -2,6 +2,15 @@ import 'package:alpha_drivers/screens/components/custom-circular-button-main.dar
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 class ConfirmSheet extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final Function onPressed;
+  const ConfirmSheet({Key key, this.title,
+    this.subtitle,
+    this.onPressed}) :
+        super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +35,7 @@ class ConfirmSheet extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 10,),
             Text(
-              'GO ONLINE',
+              title,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18,
                   fontFamily: 'CircularStd',
@@ -35,7 +44,7 @@ class ConfirmSheet extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             Text(
-              'You are about to become available to receive trip requests',
+              subtitle,
               textAlign: TextAlign.center,
               style: TextStyle(fontFamily: 'CircularStd',
                   color: BrandColors.colorTextLight),
@@ -50,9 +59,7 @@ class ConfirmSheet extends StatelessWidget {
                     text: 'BACK',
                     fontWeight: FontWeight.w700,
                     backgroundColor: BrandColors.colorLightGrayFair,
-                    onPressed: (){
-                    Navigator.pop(context);
-                    },
+                    onPressed: onPressed,
                   ),
                 ),
               ),
@@ -64,9 +71,7 @@ class ConfirmSheet extends StatelessWidget {
                       text: 'CONFIRM',
                       textColor: Colors.white,
                       backgroundColor: BrandColors.colorGreen,
-                      onPressed: (){
-
-                      },
+                      onPressed: onPressed
                     ),
                   ),
                 ),
