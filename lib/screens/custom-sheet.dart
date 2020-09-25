@@ -1,3 +1,4 @@
+import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 class ConfirmSheet extends StatelessWidget {
@@ -17,31 +18,63 @@ class ConfirmSheet extends StatelessWidget {
             ), //Offset
           ), //BoxShadow
         ]
-      ),//BoxDecoration
-      height: 220,
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 10,),
-          Text(
-            'GO ONLINE',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22, fontFamily: 'CircularStd',
-                color: BrandColors.colorText),
-          ), //Text
-          SizedBox(height: 20,),
-          Text(
-            'You are about to go online',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22, fontFamily: 'CircularStd',
-                color: BrandColors.colorTextLight),
-          ), //Text
-          Row(
-            children: <Widget>[
-
-            ],
-          ) //Row
-        ],
       ),
-    );//Container
+      height: 220,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 10,),
+            Text(
+              'GO ONLINE',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18,
+                  fontFamily: 'CircularStd',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.brown),
+            ),
+            SizedBox(height: 20,),
+            Text(
+              'You are about to become available to receive trip requests',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontFamily: 'CircularStd',
+                  color: BrandColors.colorTextLight),
+            ),
+            SizedBox(height: 30,),
+            Row(
+              children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: CustomCircularButtonMain(
+                    isLoading: false,
+                    text: 'BACK',
+                    fontWeight: FontWeight.w700,
+                    backgroundColor: BrandColors.colorLightGrayFair,
+                    onPressed: (){
+                    Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
+                Expanded(
+                  child: Container(
+                    child: CustomCircularButtonMain(
+                      isLoading: false,
+                      fontWeight: FontWeight.w700,
+                      text: 'CONFIRM',
+                      textColor: Colors.white,
+                      backgroundColor: BrandColors.colorGreen,
+                      onPressed: (){
+
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

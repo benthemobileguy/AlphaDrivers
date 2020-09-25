@@ -5,6 +5,7 @@ import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/custom-sheet.dart';
 import 'package:alpha_drivers/side-bar.dart';
+import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -32,6 +33,11 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
   Position currentPos;
+
+  var availabilityText = 'GO ONLINE';
+  Color availabilityColor = BrandColors.colorOrange;
+
+  bool isAvailable = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -90,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   child: CustomCircularButtonMain(
                     backgroundColor: Colors.white,
                     isLoading: false,
-                    text: 'GO ONLINE',
+                    text: availabilityText,
                     fontWeight: FontWeight.w700,
                     textColor: Colors.brown,
                     onPressed: () {
