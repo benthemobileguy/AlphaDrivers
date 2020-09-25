@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                     availabilityColorBg = Colors.white;
                                     availabilityColorText = Colors.brown;
                                     availabilityText = 'GO ONLINE';
-                                    isAvailable = true;
+                                    isAvailable = false;
                                   });
                                   }
                                 },
