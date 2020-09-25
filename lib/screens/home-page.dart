@@ -119,7 +119,15 @@ class _HomePageState extends State<HomePage> {
                                       isAvailable = true;
                                     });
                                   } else{
-
+                                  goOffline();
+                                  Navigator.pop(context);
+                                  //reset header state
+                                  setState(() {
+                                    availabilityColorBg = Colors.white;
+                                    availabilityColorText = Colors.brown;
+                                    availabilityText = 'GO ONLINE';
+                                    isAvailable = true;
+                                  });
                                   }
                                 },
                               ));
@@ -219,5 +227,11 @@ class _HomePageState extends State<HomePage> {
      LatLng pos = LatLng(position.latitude, position.longitude);
     mapController.animateCamera(CameraUpdate.newLatLng(pos));
     });
+  }
+  void goOffline(){
+    Geofire.removeLocation(currentFirebaseUser.uid);
+    tripRequestRef.onDisconnect();
+    tripRequestRef.remove();
+    tripRequestRef = null;
   }
 }
