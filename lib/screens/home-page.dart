@@ -3,16 +3,20 @@ import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/screens/custom-sheet.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mdi/mdi.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -20,9 +24,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc _mainBloc;
+  Geolocator geolocator;
+  var locationOptions = LocationOptions(accuracy: LocationAccuracy.bestForNavigation,
+      distanceFilter: 4);
   GoogleMapController mapController;
   TextEditingController textEditingController = new TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
   Position currentPos;
   @override
@@ -32,22 +39,21 @@ class _HomePageState extends State<HomePage> {
     _listenForPermissionStatus();
     HelperMethods.getCurrentUserInfo();
   }
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     _mainBloc = Provider.of<MainBloc>(context);
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
         child: Container(
-          child: NavDrawer(
-
-          ),
+          child: NavDrawer(),
         ),
       ),
       backgroundColor: Colors.white,
@@ -55,10 +61,10 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           new Center(
               child: new Column(
-                children: <Widget>[],
-              )),
+            children: <Widget>[],
+          )),
           GoogleMap(
-            padding: EdgeInsets.only(top:135),
+            padding: EdgeInsets.only(top: 135),
             mapType: MapType.normal,
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
@@ -69,9 +75,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           Container(
-           height: 135,
+            height: 135,
             color: Colors.brown,
-          ),//Container
+          ), //Container
           Positioned(
             top: 40,
             left: 0,
@@ -80,14 +86,19 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  width:250,
+                  width: 250,
                   child: CustomCircularButtonMain(
                     backgroundColor: Colors.white,
                     isLoading: false,
                     text: 'GO ONLINE',
                     fontWeight: FontWeight.w700,
                     textColor: Colors.brown,
-                    onPressed: (){
+                    onPressed: () {
+                      // goOnline();
+                      // getLocationUpdates();
+                      showModalBottomSheet(context: context,
+                          isDismissible: false,
+                          builder: (BuildContext context) => ConfirmSheet());
 
                     },
                   ),
@@ -107,25 +118,22 @@ class _HomePageState extends State<HomePage> {
                   shape: BoxShape.circle,
                   color: Colors.white),
               child: IconButton(
-                  icon: Icon(Mdi.menu,
-                    color: Colors.grey,),
-                  onPressed: () =>{
-                    _scaffoldKey.currentState.openDrawer()
-                  }
-              ),
+                  icon: Icon(
+                    Mdi.menu,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () => {_scaffoldKey.currentState.openDrawer()}),
             ),
           ),
         ],
-
       ),
     );
   }
 
-
-  _tellUserToTurnOnLocation(BuildContext context) async{
+  _tellUserToTurnOnLocation(BuildContext context) async {
     showModalBottomSheet(
         context: context,
-        builder: (builder){
+        builder: (builder) {
           return new Container(
             height: 350.0,
             color: Colors.transparent, //could change this to Color(0xFF737373),
@@ -140,8 +148,7 @@ class _HomePageState extends State<HomePage> {
                   child: new Text("This is a modal sheet"),
                 )),
           );
-        }
-    );
+        });
   }
 
   void _listenForPermissionStatus() async {
@@ -157,7 +164,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _getUserLocation() async{
+  void _getUserLocation() async {
     final position = await Geolocator().getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     currentPos = position;
@@ -167,7 +174,26 @@ class _HomePageState extends State<HomePage> {
     CameraPosition cameraPosition = new CameraPosition(target: pos, zoom: 14);
     await mapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-
   }
 
+  void goOnline() {
+    print(currentFirebaseUser.uid);
+    Geofire.initialize('driversAvailable');
+    Geofire.setLocation(currentFirebaseUser.uid, currentPos.latitude, currentPos.longitude);
+    tripRequestRef = FirebaseDatabase.instance.reference()
+        .child('drivers/${currentFirebaseUser.uid}/newTrip');
+    tripRequestRef.set('waiting');
+    tripRequestRef.onValue.listen((event) {
+
+    });
+  }
+  void getLocationUpdates(){
+    homeTabPositionStream = geolocator.getPositionStream(locationOptions)
+    .listen((Position position) {
+     currentPos = position;
+     Geofire.setLocation(currentFirebaseUser.uid, position.latitude, position.longitude);
+     LatLng pos = LatLng(position.latitude, position.longitude);
+    mapController.animateCamera(CameraUpdate.newLatLng(pos));
+    });
+  }
 }
