@@ -223,7 +223,9 @@ class _HomePageState extends State<HomePage> {
     homeTabPositionStream = geolocator.getPositionStream(locationOptions)
     .listen((Position position) {
      currentPos = position;
-     Geofire.setLocation(currentFirebaseUser.uid, position.latitude, position.longitude);
+     if(isAvailable){
+       Geofire.setLocation(currentFirebaseUser.uid, position.latitude, position.longitude);
+     }
      LatLng pos = LatLng(position.latitude, position.longitude);
     mapController.animateCamera(CameraUpdate.newLatLng(pos));
     });
