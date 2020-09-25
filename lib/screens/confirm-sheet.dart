@@ -59,7 +59,9 @@ class ConfirmSheet extends StatelessWidget {
                     text: 'BACK',
                     fontWeight: FontWeight.w700,
                     backgroundColor: BrandColors.colorLightGrayFair,
-                    onPressed: onPressed,
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),

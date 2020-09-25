@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MainBloc _mainBloc;
-  Geolocator geolocator;
+  var geolocator = Geolocator();
   var locationOptions = LocationOptions(accuracy: LocationAccuracy.bestForNavigation,
       distanceFilter: 4);
   GoogleMapController mapController;
@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> {
   Position currentPos;
 
   var availabilityText = 'GO ONLINE';
-  Color availabilityColor = Colors.white;
-
+  Color availabilityColorBg = Colors.white;
+  Color availabilityColorText = Colors.brown;
   bool isAvailable = false;
   @override
   void initState() {
@@ -94,11 +94,11 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: 250,
                   child: CustomCircularButtonMain(
-                    backgroundColor: availabilityColor,
+                    backgroundColor: availabilityColorBg,
                     isLoading: false,
                     text: availabilityText,
                     fontWeight: FontWeight.w700,
-                    textColor: Colors.brown,
+                    textColor: availabilityColorText,
                     onPressed: () {
                       showModalBottomSheet(context: context,
                           isDismissible: false,
@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
                                     getLocationUpdates();
                                     Navigator.pop(context);
                                     setState(() {
-                                      availabilityColor = Colors.white;
+                                      availabilityColorBg = primaryColor;
+                                      availabilityColorText = Colors.white;
                                       availabilityText = 'GO OFFLINE';
                                       isAvailable = true;
                                     });
