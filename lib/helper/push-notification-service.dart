@@ -1,3 +1,5 @@
+import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PushNotificationService{
@@ -15,5 +17,11 @@ Future initialize() async{
     },
   );
 }
-Future<String> getToken() async
+Future<String> getToken() async{
+  String token = await _firebaseMessaging.getToken();
+  print('token: $token');
+  DatabaseReference tokenRef = FirebaseDatabase.instance.reference()
+  .child('drivers/${currentFirebaseUser.uid}/token');
+  tokenRef.set(token);
+}
 }
