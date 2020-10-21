@@ -23,5 +23,7 @@ Future<String> getToken() async{
   DatabaseReference tokenRef = FirebaseDatabase.instance.reference()
   .child('drivers/${currentFirebaseUser.uid}/token');
   tokenRef.set(token);
+  _firebaseMessaging.subscribeToTopic('alldrivers');
+  _firebaseMessaging.subscribeToTopic('allusers');
 }
 }
