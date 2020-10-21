@@ -27,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ALPHA TAXI',
+      title: 'ALPHA DRIVERS',
       home: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -48,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
                     Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "ALPHA\nTAXI",
+                          "ALPHA\nDRIVERS",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 30.0,
