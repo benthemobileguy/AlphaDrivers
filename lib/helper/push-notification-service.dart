@@ -15,5 +15,5 @@ Future initialize() async{
     },
   );
 }
-
+Future<String> getToken() async
 }
