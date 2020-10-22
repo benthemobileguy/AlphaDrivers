@@ -6,4 +6,7 @@ class TripDetails{
   LatLng pickup;
   LatLng destination;
   String rideId;
+  String paymentMethod;
+  String rideName;
+
 }
