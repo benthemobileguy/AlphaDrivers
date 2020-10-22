@@ -2,6 +2,7 @@ import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
   final TripDetails tripDetails;
@@ -109,5 +110,12 @@ class NotificationDialog extends StatelessWidget {
       ),
     );
   }
-  void
+  void checkAvailability(){
+    DatabaseReference newRideRef = FirebaseDatabase.instance.reference()
+        .child('drivers/${currentFirebaseUser.uid}/newtrip');
+    newRideRef.once().then((DataSnapshot snapshot) => {
+      String thisRideId
+    });
+
+  }
 }
