@@ -1,5 +1,6 @@
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -110,10 +111,14 @@ class NotificationDialog extends StatelessWidget {
       ),
     );
   }
-  void checkAvailability(){
+  void checkAvailability(context){
+    showDialog(context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => CustomProgressDialog(status: 'Accepting request',));
     DatabaseReference newRideRef = FirebaseDatabase.instance.reference()
         .child('drivers/${currentFirebaseUser.uid}/newtrip');
     newRideRef.once().then((DataSnapshot snapshot) {
+      Navigator.pop(context);
       String thisRideId = "";
       if(snapshot.value !=null){
         thisRideId = snapshot.value.toString();
