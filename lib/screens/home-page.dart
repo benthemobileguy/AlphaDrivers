@@ -105,40 +105,38 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w700,
                     textColor: availabilityColorText,
                     onPressed: () {
-                      showDialog(context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) => NotificationDialog());
-                      // showModalBottomSheet(context: context,
-                      //     isDismissible: false,
-                      //     builder: (BuildContext context) =>
-                      //         ConfirmSheet(
-                      //           title: (!isAvailable) ? 'GO ONLINE': 'GO OFFLINE',
-                      //           subtitle: (!isAvailable) ? 'You are about to become available to receive trip requests'
-                      //           : 'You will stop receiving trip requests',
-                      //           onPressed: (){
-                      //             if(!isAvailable){
-                      //               goOnline();
-                      //               getLocationUpdates();
-                      //               Navigator.pop(context);
-                      //               setState(() {
-                      //                 availabilityColorBg = primaryColor;
-                      //                 availabilityColorText = Colors.white;
-                      //                 availabilityText = 'GO OFFLINE';
-                      //                 isAvailable = true;
-                      //               });
-                      //             } else{
-                      //             goOffline();
-                      //             Navigator.pop(context);
-                      //             //reset header state
-                      //             setState(() {
-                      //               availabilityColorBg = Colors.white;
-                      //               availabilityColorText = Colors.brown;
-                      //               availabilityText = 'GO ONLINE';
-                      //               isAvailable = false;
-                      //             });
-                      //             }
-                      //           },
-                      //         ));
+                      showModalBottomSheet(context: context,
+                          isDismissible: false,
+                          builder: (BuildContext context) =>
+                              ConfirmSheet(
+                                title: (!isAvailable) ? 'GO ONLINE': 'GO OFFLINE',
+                                subtitle: (!isAvailable) ? 'You are about to become available to receive trip requests'
+                                : 'You will stop receiving trip requests',
+                                onPressed: (){
+
+                                  if(!isAvailable){
+                                    goOnline();
+                                    getLocationUpdates();
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      availabilityColorBg = primaryColor;
+                                      availabilityColorText = Colors.white;
+                                      availabilityText = 'GO OFFLINE';
+                                      isAvailable = true;
+                                    });
+                                  } else{
+                                  goOffline();
+                                  Navigator.pop(context);
+                                  //reset header state
+                                  setState(() {
+                                    availabilityColorBg = Colors.white;
+                                    availabilityColorText = Colors.brown;
+                                    availabilityText = 'GO ONLINE';
+                                    isAvailable = false;
+                                  });
+                                  }
+                                },
+                              ));
 
                     },
                   ),

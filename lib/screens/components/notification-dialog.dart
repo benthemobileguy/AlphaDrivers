@@ -1,7 +1,12 @@
+import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
+  final TripDetails tripDetails;
+
+  const NotificationDialog({Key key, this.tripDetails}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -18,6 +23,7 @@ class NotificationDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
           SizedBox(height: 30.0,),
             Image.asset('images/taxi.png', width: 100,),
@@ -39,7 +45,11 @@ class NotificationDialog extends StatelessWidget {
                      children: <Widget>[
                     Image.asset('images/pickupicon.png', height: 16, width: 16,),
                        SizedBox(width: 18,),
-                       Text('OVU Close PH', style: TextStyle(fontSize: 18),),
+                       Expanded(
+                         child: Container(child:
+                         Text(tripDetails.pickupAddress,
+                           style: TextStyle(fontSize: 18),)),
+                       ),
                      ],
                    ),
                   SizedBox(height: 15,),
@@ -48,7 +58,10 @@ class NotificationDialog extends StatelessWidget {
                     children: <Widget>[
                       Image.asset('images/desticon.png', height: 16, width: 16,),
                       SizedBox(width: 18,),
-                      Text('SPAR PH', style: TextStyle(fontSize: 18),),
+                      Expanded(child:
+                      Container(child:
+                      Text(tripDetails.destinationAddress,
+                        style: TextStyle(fontSize: 18),))),
                     ],
                   ),
                 ],
@@ -74,7 +87,29 @@ class NotificationDialog extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
+            SizedBox(width: 10.0,),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: CustomCircularButtonMain(
+                        text: 'ACCEPT',
+                        isLoading: false,
+                        backgroundColor: BrandColors.colorPrimary,
+                        onPressed: () async{
+
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(width: 10.0,),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alpha_drivers/screens/components/notification-dialog.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -6,7 +7,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 class PushNotificationService{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -76,6 +76,10 @@ if(snapshot.value !=null){
   tripDetails.destinationAddress = destinationAddress;
   tripDetails.pickup = LatLng(destinationLat, destinationLng);
   tripDetails.paymentMethod = paymentMethod;
+  showDialog(context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => NotificationDialog(
+        tripDetails: tripDetails,));
 
 }
  });
