@@ -4,5 +4,6 @@ class TripDetails{
   String destinationAddress;
   String pickupAddress;
   LatLng pickup;
-  LatLng pickup;
+  LatLng destination;
+  String rideId;
 }
