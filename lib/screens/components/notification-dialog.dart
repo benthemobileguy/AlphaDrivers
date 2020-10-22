@@ -48,7 +48,7 @@ class NotificationDialog extends StatelessWidget {
                        Expanded(
                          child: Container(child:
                          Text(tripDetails.pickupAddress,
-                           style: TextStyle(fontSize: 16.5),)),
+                           style: TextStyle(fontSize: 16.5, fontFamily: 'CircularStd'),)),
                        ),
                      ],
                    ),
@@ -61,7 +61,7 @@ class NotificationDialog extends StatelessWidget {
                       Expanded(child:
                       Container(child:
                       Text(tripDetails.destinationAddress,
-                        style: TextStyle(fontSize: 16.5),))),
+                        style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
                     ],
                   ),
                 ],

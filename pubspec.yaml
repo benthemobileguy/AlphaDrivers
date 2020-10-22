@@ -32,7 +32,7 @@ dependencies:
   firebase_core: ^0.4.5
   flutter_geofire: ^1.0.3
   firebase_messaging: ^6.0.16
-  assets_audio_player: ^2.0.11
+  assets_audio_player: ^1.7.0
   cloud_firestore: ^0.13.7
   progress_dialog: ^1.2.1
   image_picker: ^0.6.0
@@ -71,7 +71,7 @@ flutter:
 
   assets:
     - images/
-
+    - sounds/
 
   fonts:
     - family: OpenSans

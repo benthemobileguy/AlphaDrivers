@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:alpha_drivers/screens/components/notification-dialog.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
@@ -57,6 +58,11 @@ class PushNotificationService{
  rideRef.once().then((DataSnapshot snapshot){
    Navigator.pop(context);
 if(snapshot.value !=null){
+  final assetsAudioPlayer = AssetsAudioPlayer();
+  assetsAudioPlayer.open(
+    Audio('sounds/alert.mp3'),
+  );
+  assetsAudioPlayer.play();
   print("not null");
   double pickupLat = double.parse(snapshot.value['location']['latitude'].toString());
   double pickupLng = double.parse(snapshot.value['location']['longitude'].toString());
