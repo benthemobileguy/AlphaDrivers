@@ -43,12 +43,12 @@ class NotificationDialog extends StatelessWidget {
                    Row(
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: <Widget>[
-                    Image.asset('images/pickupicon.png', height: 16, width: 16,),
+                    Image.asset('images/pickicon.png', height: 16, width: 16,),
                        SizedBox(width: 18,),
                        Expanded(
                          child: Container(child:
                          Text(tripDetails.pickupAddress,
-                           style: TextStyle(fontSize: 18),)),
+                           style: TextStyle(fontSize: 16.5),)),
                        ),
                      ],
                    ),
@@ -61,7 +61,7 @@ class NotificationDialog extends StatelessWidget {
                       Expanded(child:
                       Container(child:
                       Text(tripDetails.destinationAddress,
-                        style: TextStyle(fontSize: 18),))),
+                        style: TextStyle(fontSize: 16.5),))),
                     ],
                   ),
                 ],
@@ -77,6 +77,8 @@ class NotificationDialog extends StatelessWidget {
                     child: Container(
                       child: CustomCircularButtonMain(
                         text: 'DECLINE',
+                        fontWeight: FontWeight.w700,
+                        textColor: Colors.white,
                         isLoading: false,
                         backgroundColor: BrandColors.colorPrimary,
                         onPressed: () async{
@@ -98,6 +100,8 @@ class NotificationDialog extends StatelessWidget {
                     child: Container(
                       child: CustomCircularButtonMain(
                         text: 'ACCEPT',
+                        fontWeight: FontWeight.w700,
+                        textColor: Colors.white,
                         isLoading: false,
                         backgroundColor: BrandColors.colorPrimary,
                         onPressed: () async{
