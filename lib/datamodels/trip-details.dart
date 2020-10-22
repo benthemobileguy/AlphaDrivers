@@ -8,5 +8,9 @@ class TripDetails{
   String rideId;
   String paymentMethod;
   String rideName;
+  String riderPhone;
 
+  TripDetails({
+
+});
 }
