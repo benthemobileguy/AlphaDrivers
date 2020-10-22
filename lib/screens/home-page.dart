@@ -105,7 +105,9 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w700,
                     textColor: availabilityColorText,
                     onPressed: () {
-                      showDialog(context: context,barrierDismissible: false, builder: (BuildContext context) => NotificationDialog())
+                      showDialog(context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) => NotificationDialog());
                       // showModalBottomSheet(context: context,
                       //     isDismissible: false,
                       //     builder: (BuildContext context) =>
