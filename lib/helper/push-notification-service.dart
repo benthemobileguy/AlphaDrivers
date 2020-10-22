@@ -52,11 +52,12 @@ class PushNotificationService{
       context: context,
       builder: (BuildContext context) =>
           CustomProgressDialog(status:'Fetching details',),);
- DatabaseReference rideRef = FirebaseDatabase.instance
-     .reference().child('rideRequest/$rideId');
+ DatabaseReference rideRef = FirebaseDatabase.instance.
+ reference().child('RideRequest').child(rideId);
  rideRef.once().then((DataSnapshot snapshot){
    Navigator.pop(context);
 if(snapshot.value !=null){
+  print("not null");
   double pickupLat = double.parse(snapshot.value['location']['latitude'].toString());
   double pickupLng = double.parse(snapshot.value['location']['latitude'].toString());
   String pickupAddress = snapshot.value['pickup_address'].toString();
@@ -78,7 +79,11 @@ if(snapshot.value !=null){
       builder: (BuildContext context) => NotificationDialog(
         tripDetails: tripDetails,));
 
+} else{
+  print("null");
 }
+ }).catchError((e)=>{
+
  });
   }
 }
