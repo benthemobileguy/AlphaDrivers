@@ -119,7 +119,10 @@ class NotificationDialog extends StatelessWidget {
         thisRideId = snapshot.value.toString();
 
       }
+ if(thisRideId == tripDetails.rideId){
+   newRideRef.set('accepted');
 
+ }
     });
 
   }
