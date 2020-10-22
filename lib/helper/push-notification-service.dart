@@ -58,7 +58,6 @@ class PushNotificationService{
  rideRef.once().then((DataSnapshot snapshot){
    Navigator.pop(context);
 if(snapshot.value !=null){
-  final assetsAudioPlayer = AssetsAudioPlayer();
   assetsAudioPlayer.open(
     Audio('sounds/alert.mp3'),
   );

@@ -1,6 +1,7 @@
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
+import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
   final TripDetails tripDetails;
@@ -80,7 +81,8 @@ class NotificationDialog extends StatelessWidget {
                       isLoading: false,
                       backgroundColor: BrandColors.colorTextDark,
                       onPressed: () async{
-
+                        assetsAudioPlayer.stop();
+                        Navigator.pop(context);
                       },
                     ),
                   ),
