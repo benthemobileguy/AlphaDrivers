@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -7,11 +8,11 @@ class PushNotificationService{
   Future initialize() async{
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        getRideId(message);
+        fetchRideInfo(getRideId(message));
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
-        getRideId(message);
+        fetchRideInfo(getRideId(message));
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
@@ -22,9 +23,9 @@ class PushNotificationService{
   Future<String> getToken() async{
     String token = await _firebaseMessaging.getToken();
     print('token got as: $token');
-    // DatabaseReference tokenRef = FirebaseDatabase. instance.reference()
-    //     .child('drivers/${currentFirebaseUser.uid}/token');
-    // tokenRef.set(token);
+    DatabaseReference tokenRef = FirebaseDatabase. instance.reference()
+        .child('drivers/${currentFirebaseUser.uid}/token');
+    tokenRef.set(token);
     _firebaseMessaging.subscribeToTopic('alldrivers');
     _firebaseMessaging.subscribeToTopic('allusers');
 
