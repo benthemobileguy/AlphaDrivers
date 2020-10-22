@@ -3,6 +3,7 @@ import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PushNotificationService{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -54,14 +55,15 @@ if(snapshot.value !=null){
   double destinationLat = double.parse(snapshot.value['destination']['latitude'].toString());
   double destinationLng = double.parse(snapshot.value['destination']['latitude'].toString());
   String destinationAddress = snapshot.value['destination_address'].toString();
-  double paymentMethod = double.parse(snapshot.value['payment_method'].toString());
+  String paymentMethod = snapshot.value['payment_method'].toString();
   print(pickupAddress);
 
   TripDetails tripDetails = TripDetails();
   tripDetails.rideId  = rideId;
   tripDetails.pickupAddress = pickupAddress;
   tripDetails.destinationAddress = destinationAddress;
-
+  tripDetails.pickup = LatLng(destinationLat, destinationLng);
+  tripDetails.paymentMethod = paymentMethod;
 
 }
  });
