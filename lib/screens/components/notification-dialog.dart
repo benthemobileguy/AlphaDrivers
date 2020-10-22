@@ -1,4 +1,5 @@
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
   @override
@@ -64,7 +65,7 @@ class NotificationDialog extends StatelessWidget {
                       child: CustomCircularButtonMain(
                         text: 'DECLINE',
                         isLoading: false,
-                        color: BrandColors.colorPrimary,
+                        backgroundColor: BrandColors.colorPrimary,
                         onPressed: () async{
 
                         },
