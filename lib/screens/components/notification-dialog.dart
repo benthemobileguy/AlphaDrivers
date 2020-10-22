@@ -99,6 +99,7 @@ class NotificationDialog extends StatelessWidget {
                       backgroundColor: BrandColors.colorGreen,
                       onPressed: () async{
                      assetsAudioPlayer.stop();
+                     checkAvailability(context);
                       },
                     ),
                   ),
@@ -118,6 +119,7 @@ class NotificationDialog extends StatelessWidget {
     DatabaseReference newRideRef = FirebaseDatabase.instance.reference()
         .child('drivers/${currentFirebaseUser.uid}/newtrip');
     newRideRef.once().then((DataSnapshot snapshot) {
+      Navigator.pop(context);
       Navigator.pop(context);
       String thisRideId = "";
       if(snapshot.value !=null){
