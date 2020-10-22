@@ -15,7 +15,7 @@ class PushNotificationService{
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
-        getRideId(message);
+       fetchRideInfo(getRideId(message));
       },
     );
   }
@@ -49,10 +49,11 @@ if(snapshot.value !=null){
   double pickupLng = double.parse(snapshot.value['location']['latitude'].toString());
   double pickupAddress = double.parse(snapshot.value['location']['latitude'].toString());
 
-  double destinationLat = double.parse(snapshot.value['location']['latitude'].toString());
-  double destinationLng = double.parse(snapshot.value['location']['latitude'].toString());
-  double destinationAddress = double.parse(snapshot.value['location']['latitude'].toString());
-  double paymentMethod = double.parse(snapshot.value['location']['latitude'].toString());
+  double destinationLat = double.parse(snapshot.value['destination']['latitude'].toString());
+  double destinationLng = double.parse(snapshot.value['destination']['latitude'].toString());
+  double destinationAddress = double.parse(snapshot.value['destination_address'].toString());
+  double paymentMethod = double.parse(snapshot.value['payment_method'].toString());
+  print(pickupAddress);
 }
  });
   }
