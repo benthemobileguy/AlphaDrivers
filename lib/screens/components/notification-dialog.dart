@@ -68,52 +68,40 @@ class NotificationDialog extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8,),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: CustomCircularButtonMain(
-                        text: 'DECLINE',
-                        fontWeight: FontWeight.w700,
-                        textColor: Colors.white,
-                        isLoading: false,
-                        backgroundColor: BrandColors.colorPrimary,
-                        onPressed: () async{
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    child: CustomCircularButtonMain(
+                      text: 'ACCEPT',
+                      fontWeight: FontWeight.w500,
+                      textColor: Colors.white,
+                      isLoading: false,
+                      backgroundColor: BrandColors.colorPrimary,
+                      onPressed: () async{
 
-                        },
-                      ),
+                      },
                     ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(width: 10.0,),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: CustomCircularButtonMain(
-                        text: 'ACCEPT',
-                        fontWeight: FontWeight.w700,
-                        textColor: Colors.white,
-                        isLoading: false,
-                        backgroundColor: BrandColors.colorPrimary,
-                        onPressed: () async{
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: CustomCircularButtonMain(
+                      text: 'ACCEPT',
+                      fontWeight: FontWeight.w500,
+                      textColor: Colors.white,
+                      isLoading: false,
+                      backgroundColor: BrandColors.colorPrimary,
+                      onPressed: () async{
 
-                        },
-                      ),
+                      },
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(width: 10.0,),
+            SizedBox(height: 30,),
           ],
         ),
       ),
