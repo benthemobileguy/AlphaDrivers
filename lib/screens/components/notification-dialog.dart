@@ -122,6 +122,13 @@ class NotificationDialog extends StatelessWidget {
  if(thisRideId == tripDetails.rideId){
    newRideRef.set('accepted');
 
+ } else if(thisRideId == 'cancelled'){
+   print('ride has been cancelled');
+
+ } else if(thisRideId == 'timeout'){
+print('ride has timed out');
+ } else{
+   print('ride not found');
  }
     });
 
