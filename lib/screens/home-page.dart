@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
 void getCurrentDriverInfo() async{
     currentFirebaseUser = await FirebaseAuth.instance.currentUser();
     PushNotificationService pushNotificationService = PushNotificationService();
-    pushNotificationService.initialize();
+    pushNotificationService.initialize(context);
     pushNotificationService.getToken();
 }
   void goOnline() {

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -49,7 +50,8 @@ class PushNotificationService{
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (BuildContext context) => ProgressDialog(status:'Fetching details',),
+      builder: (BuildContext context) =>
+          CustomProgressDialog(status:'Fetching details',),
 
 
     );
