@@ -96,7 +96,7 @@ class NotificationDialog extends StatelessWidget {
                       isLoading: false,
                       backgroundColor: BrandColors.colorGreen,
                       onPressed: () async{
-
+                     assetsAudioPlayer.stop();
                       },
                     ),
                   ),
