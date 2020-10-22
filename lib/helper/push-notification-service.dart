@@ -44,7 +44,16 @@ class PushNotificationService{
  DatabaseReference rideRef = FirebaseDatabase.instance
      .reference().child('rideRequest/$rideId');
  rideRef.once().then((DataSnapshot snapshot){
+if(snapshot.value !=null){
+  double pickupLat = double.parse(snapshot.value['location']['latitude'].toString());
+  double pickupLng = double.parse(snapshot.value['location']['latitude'].toString());
+  double pickupAddress = double.parse(snapshot.value['location']['latitude'].toString());
 
+  double destinationLat = double.parse(snapshot.value['location']['latitude'].toString());
+  double destinationLng = double.parse(snapshot.value['location']['latitude'].toString());
+  double destinationAddress = double.parse(snapshot.value['location']['latitude'].toString());
+  double paymentMethod = double.parse(snapshot.value['location']['latitude'].toString());
+}
  });
   }
 }
