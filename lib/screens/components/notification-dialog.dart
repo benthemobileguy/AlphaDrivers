@@ -113,8 +113,13 @@ class NotificationDialog extends StatelessWidget {
   void checkAvailability(){
     DatabaseReference newRideRef = FirebaseDatabase.instance.reference()
         .child('drivers/${currentFirebaseUser.uid}/newtrip');
-    newRideRef.once().then((DataSnapshot snapshot) => {
-      String thisRideId
+    newRideRef.once().then((DataSnapshot snapshot) {
+      String thisRideId = "";
+      if(snapshot.value !=null){
+        thisRideId = snapshot.value.toString();
+
+      }
+
     });
 
   }
