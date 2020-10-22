@@ -11,6 +11,13 @@ class TripDetails{
   String riderPhone;
 
   TripDetails({
-
+  this.destinationAddress,
+    this.pickupAddress,
+    this.pickup,
+    this.destination,
+    this.rideId,
+    this.paymentMethod,
+    this.rideName,
+    this.riderPhone
 });
 }
