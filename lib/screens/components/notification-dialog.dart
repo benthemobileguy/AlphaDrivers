@@ -17,6 +17,11 @@ class NotificationDialog extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
+          SizedBox(height: 30.0,),
+            Image.asset('images/taxi.png', width: 100,),
+            SizedBox(height: 30.0,),
+            Text('NEW TRIP REQUEST', style: TextStyle(fontFamily: 'Brand-Bold', fontSize: 18),),
+            SizedBox(height: 30.0,),
 
           ],
         ),
