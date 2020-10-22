@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -48,13 +49,20 @@ class PushNotificationService{
 if(snapshot.value !=null){
   double pickupLat = double.parse(snapshot.value['location']['latitude'].toString());
   double pickupLng = double.parse(snapshot.value['location']['latitude'].toString());
-  double pickupAddress = double.parse(snapshot.value['location']['latitude'].toString());
+  String pickupAddress = snapshot.value['pickup_address'].toString();
 
   double destinationLat = double.parse(snapshot.value['destination']['latitude'].toString());
   double destinationLng = double.parse(snapshot.value['destination']['latitude'].toString());
-  double destinationAddress = double.parse(snapshot.value['destination_address'].toString());
+  String destinationAddress = snapshot.value['destination_address'].toString();
   double paymentMethod = double.parse(snapshot.value['payment_method'].toString());
   print(pickupAddress);
+
+  TripDetails tripDetails = TripDetails();
+  tripDetails.rideId  = rideId;
+  tripDetails.pickupAddress = pickupAddress;
+  tripDetails.destinationAddress = destinationAddress;
+
+
 }
  });
   }
