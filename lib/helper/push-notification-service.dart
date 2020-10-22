@@ -9,18 +9,18 @@ import 'package:progress_dialog/progress_dialog.dart';
 
 class PushNotificationService{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  Future initialize() async{
+  Future initialize(context) async{
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        fetchRideInfo(getRideId(message));
+        fetchRideInfo(getRideId(message), context);
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
-        fetchRideInfo(getRideId(message));
+        fetchRideInfo(getRideId(message), context);
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
-       fetchRideInfo(getRideId(message));
+       fetchRideInfo(getRideId(message), context);
       },
     );
   }
