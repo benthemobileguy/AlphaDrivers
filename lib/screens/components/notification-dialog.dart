@@ -20,9 +20,38 @@ class NotificationDialog extends StatelessWidget {
           SizedBox(height: 30.0,),
             Image.asset('images/taxi.png', width: 100,),
             SizedBox(height: 30.0,),
-            Text('NEW TRIP REQUEST', style: TextStyle(fontFamily: 'Brand-Bold', fontSize: 18),),
+            Text('NEW TRIP REQUEST',
+              style: TextStyle(
+              color: Colors.black,
+              fontSize: 18.0,
+              fontFamily: 'CircularStd',
+              fontWeight: FontWeight.w500,
+            ),),
             SizedBox(height: 30.0,),
-
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                   Row(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: <Widget>[
+                    Image.asset('images/pickupicon.png', height: 16, width: 16,),
+                       SizedBox(width: 18,),
+                       Text('OVU Close PH', style: TextStyle(fontSize: 18),),
+                     ],
+                   ),
+                  SizedBox(height: 15,),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Image.asset('images/destpicon.png', height: 16, width: 16,),
+                      SizedBox(width: 18,),
+                      Text('SPAR PH', style: TextStyle(fontSize: 18),),
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

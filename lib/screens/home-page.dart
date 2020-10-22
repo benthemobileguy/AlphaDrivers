@@ -4,6 +4,7 @@ import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/helper/push-notification-service.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
+import 'package:alpha_drivers/screens/components/notification-dialog.dart';
 import 'package:alpha_drivers/screens/confirm-sheet.dart';
 import 'package:alpha_drivers/side-bar.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
@@ -104,37 +105,38 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w700,
                     textColor: availabilityColorText,
                     onPressed: () {
-                      showModalBottomSheet(context: context,
-                          isDismissible: false,
-                          builder: (BuildContext context) =>
-                              ConfirmSheet(
-                                title: (!isAvailable) ? 'GO ONLINE': 'GO OFFLINE',
-                                subtitle: (!isAvailable) ? 'You are about to become available to receive trip requests'
-                                : 'You will stop receiving trip requests',
-                                onPressed: (){
-                                  if(!isAvailable){
-                                    goOnline();
-                                    getLocationUpdates();
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      availabilityColorBg = primaryColor;
-                                      availabilityColorText = Colors.white;
-                                      availabilityText = 'GO OFFLINE';
-                                      isAvailable = true;
-                                    });
-                                  } else{
-                                  goOffline();
-                                  Navigator.pop(context);
-                                  //reset header state
-                                  setState(() {
-                                    availabilityColorBg = Colors.white;
-                                    availabilityColorText = Colors.brown;
-                                    availabilityText = 'GO ONLINE';
-                                    isAvailable = false;
-                                  });
-                                  }
-                                },
-                              ));
+                      showDialog(context: context,barrierDismissible: false, builder: (BuildContext context) => NotificationDialog())
+                      // showModalBottomSheet(context: context,
+                      //     isDismissible: false,
+                      //     builder: (BuildContext context) =>
+                      //         ConfirmSheet(
+                      //           title: (!isAvailable) ? 'GO ONLINE': 'GO OFFLINE',
+                      //           subtitle: (!isAvailable) ? 'You are about to become available to receive trip requests'
+                      //           : 'You will stop receiving trip requests',
+                      //           onPressed: (){
+                      //             if(!isAvailable){
+                      //               goOnline();
+                      //               getLocationUpdates();
+                      //               Navigator.pop(context);
+                      //               setState(() {
+                      //                 availabilityColorBg = primaryColor;
+                      //                 availabilityColorText = Colors.white;
+                      //                 availabilityText = 'GO OFFLINE';
+                      //                 isAvailable = true;
+                      //               });
+                      //             } else{
+                      //             goOffline();
+                      //             Navigator.pop(context);
+                      //             //reset header state
+                      //             setState(() {
+                      //               availabilityColorBg = Colors.white;
+                      //               availabilityColorText = Colors.brown;
+                      //               availabilityText = 'GO ONLINE';
+                      //               isAvailable = false;
+                      //             });
+                      //             }
+                      //           },
+                      //         ));
 
                     },
                   ),
