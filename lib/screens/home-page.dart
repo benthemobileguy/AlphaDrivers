@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
+import 'package:alpha_drivers/helper/push-notification-service.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/confirm-sheet.dart';
@@ -9,6 +10,8 @@ import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
@@ -44,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _listenForPermissionStatus();
     HelperMethods.getCurrentUserInfo();
+    getCurrentDriverInfo();
   }
 
   @override
@@ -207,7 +211,12 @@ class _HomePageState extends State<HomePage> {
     await mapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
-
+void getCurrentDriverInfo() async{
+    currentFirebaseUser = await FirebaseAuth.instance.currentUser();
+    PushNotificationService pushNotificationService = PushNotificationService();
+    pushNotificationService.initialize();
+    pushNotificationService.getToken();
+}
   void goOnline() {
     print(currentFirebaseUser.uid);
     Geofire.initialize('driversAvailable');
