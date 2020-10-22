@@ -36,7 +36,7 @@ class _CustomCircularButtonMainState extends State<CustomCircularButtonMain> {
             widget.text,
             style: TextStyle(
               fontWeight: widget.fontWeight,
-              fontFamily: "OpenSans",
+              fontFamily: "CircularStd",
               color: widget.textColor,
               fontSize: 16,
             ),

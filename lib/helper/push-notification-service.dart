@@ -46,6 +46,7 @@ class PushNotificationService{
       String rideId = message['ride_id'];
       print('ride_id: $rideId');
     }
+    return rideId;
   }
   void fetchRideInfo(String rideId, context){
     showDialog(
@@ -54,7 +55,7 @@ class PushNotificationService{
       builder: (BuildContext context) =>
           CustomProgressDialog(status:'Fetching details',),);
  DatabaseReference rideRef = FirebaseDatabase.instance.
- reference().child('RideRequest/-MJQTmCj_zWFc983w3Jg');
+ reference().child('RideRequest/$rideId');
  rideRef.once().then((DataSnapshot snapshot){
    Navigator.pop(context);
 if(snapshot.value !=null){
