@@ -51,10 +51,7 @@ class PushNotificationService{
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) =>
-          CustomProgressDialog(status:'Fetching details',),
-
-
-    );
+          CustomProgressDialog(status:'Fetching details',),);
  DatabaseReference rideRef = FirebaseDatabase.instance
      .reference().child('rideRequest/$rideId');
  rideRef.once().then((DataSnapshot snapshot){
