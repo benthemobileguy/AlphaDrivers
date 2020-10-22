@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class PushNotificationService{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -44,15 +45,18 @@ class PushNotificationService{
       print('ride_id: $rideId');
     }
   }
-  void fetchRideInfo(String rideId){
+  void fetchRideInfo(String rideId, context){
     showDialog(
       barrierDismissible: false,
-      context: context: ,
+      context: context,
+      builder: (BuildContext context) => ProgressDialog(status:'Fetching details',),
+
 
     );
  DatabaseReference rideRef = FirebaseDatabase.instance
      .reference().child('rideRequest/$rideId');
  rideRef.once().then((DataSnapshot snapshot){
+   Navigator.pop(context);
 if(snapshot.value !=null){
   double pickupLat = double.parse(snapshot.value['location']['latitude'].toString());
   double pickupLng = double.parse(snapshot.value['location']['latitude'].toString());
