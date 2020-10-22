@@ -67,18 +67,18 @@ class NotificationDialog extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Expanded(
                   child: Container(
                     child: CustomCircularButtonMain(
-                      text: 'ACCEPT',
+                      text: 'DECLINE',
                       fontWeight: FontWeight.w500,
                       textColor: Colors.white,
                       isLoading: false,
-                      backgroundColor: BrandColors.colorPrimary,
+                      backgroundColor: BrandColors.colorTextDark,
                       onPressed: () async{
 
                       },
@@ -92,7 +92,7 @@ class NotificationDialog extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       textColor: Colors.white,
                       isLoading: false,
-                      backgroundColor: BrandColors.colorPrimary,
+                      backgroundColor: BrandColors.colorGreen,
                       onPressed: () async{
 
                       },
