@@ -3,6 +3,7 @@ import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PushNotificationService{
@@ -44,6 +45,11 @@ class PushNotificationService{
     }
   }
   void fetchRideInfo(String rideId){
+    showDialog(
+      barrierDismissible: false,
+      context: context: ,
+
+    );
  DatabaseReference rideRef = FirebaseDatabase.instance
      .reference().child('rideRequest/$rideId');
  rideRef.once().then((DataSnapshot snapshot){
