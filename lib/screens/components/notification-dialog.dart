@@ -1,3 +1,4 @@
+import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
   @override
@@ -44,11 +45,32 @@ class NotificationDialog extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Image.asset('images/destpicon.png', height: 16, width: 16,),
+                      Image.asset('images/desticon.png', height: 16, width: 16,),
                       SizedBox(width: 18,),
                       Text('SPAR PH', style: TextStyle(fontSize: 18),),
                     ],
                   ),
+                ],
+              ),
+            ),
+            SizedBox(height: 8,),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: CustomCircularButtonMain(
+                        text: 'DECLINE',
+                        isLoading: false,
+                        color: BrandColors.colorPrimary,
+                        onPressed: () async{
+
+                        },
+                      ),
+                    ),
+                  )
                 ],
               ),
             )
