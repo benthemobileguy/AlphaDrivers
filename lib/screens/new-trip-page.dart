@@ -219,7 +219,6 @@ class _NewTripPageState extends State<NewTripPage> {
         markerId: MarkerId("destination"),
         position: destinationLatLng,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-        infoWindow: InfoWindow(title: pickup.placeName, snippet: 'Destination'),
       ); //Marker
       setState(() {
         _markers.add(pickUpMarker);
@@ -231,7 +230,7 @@ class _NewTripPageState extends State<NewTripPage> {
         strokeColor: Colors.green,
         strokeWidth: 3,
         radius: 12,
-        center: pickLatLng,
+        center: pickupLatLng,
         fillColor: BrandColors.colorGreen,
       ); //Circle
       Circle destinationCircle = Circle(
@@ -239,7 +238,7 @@ class _NewTripPageState extends State<NewTripPage> {
         strokeColor: BrandColors.colorAccentPurple,
         strokeWidth: 3,
         radius: 12,
-        center: destinationLatlng,
+        center: destinationLatLng,
         fillColor: BrandColors.colorAccentPurple,
       ); //Circle
       setState(() {
