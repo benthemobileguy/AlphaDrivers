@@ -77,7 +77,7 @@ class NotificationDialog extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             Container(
-              margin: ,
+              margin: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

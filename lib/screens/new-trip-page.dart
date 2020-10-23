@@ -6,6 +6,7 @@ import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -253,4 +254,10 @@ class _NewTripPageState extends State<NewTripPage> {
       print(e.toString());
     }
   }
+  void acceptTrip(){
+String rideId = widget.tripDetails.rideId;
+DatabaseReference rideRef;
+
+  }
+
 }
