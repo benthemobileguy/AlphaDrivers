@@ -214,6 +214,13 @@ class _HomePageState extends State<HomePage> {
   }
 void getCurrentDriverInfo() async{
     currentFirebaseUser = await FirebaseAuth.instance.currentUser();
+    DatabaseReference driverRef = FirebaseDatabase.instance.reference()
+        .child('drivers/${currentFirebaseUser.uid}');
+   driverRef.once().then((DataSnapshot snapshot){
+     if(snapshot.value !=null){
+
+     }
+   });
     PushNotificationService pushNotificationService = PushNotificationService();
     pushNotificationService.initialize(context);
     pushNotificationService.getToken();
