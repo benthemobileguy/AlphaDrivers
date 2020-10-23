@@ -46,9 +46,7 @@ class _NewTripPageState extends State<NewTripPage> {
              mapController = controller;
              var currentLatLng = LatLng(currentPos.latitude, currentPos.longitude);
              var pickupLatLng = widget.tripDetails.pickup;
-
-
-
+             getDirection(currentLatLng, pickupLatLng);
            },
          ),
          Positioned(
