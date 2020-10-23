@@ -58,7 +58,18 @@ class _NewTripPageState extends State<NewTripPage> {
                 fontFamily: 'CircularStd',
                 color: BrandColors.colorAccentPurple,
               ),
-            )
+            ),
+               SizedBox(height: 5,),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: <Widget>[
+                   Text('Daniel Jones', style: TextStyle(fontSize: 22, fontFamily: 'CircularStd'), ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Icon(Icons.call),
+                  ),
+                 ],
+               )
              ],
            ),
          )
