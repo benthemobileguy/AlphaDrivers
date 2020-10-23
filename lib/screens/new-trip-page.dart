@@ -256,7 +256,9 @@ class _NewTripPageState extends State<NewTripPage> {
   }
   void acceptTrip(){
 String rideId = widget.tripDetails.rideId;
-DatabaseReference rideRef;
+rideRef = FirebaseDatabase.instance.reference().child('rideRequest/$rideId');
+rideRef.child('status').set('accepted');
+
 
   }
 

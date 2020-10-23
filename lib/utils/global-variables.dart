@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 FirebaseUser currentFirebaseUser;
 User currentUserInfo;
 Position currentPos;
+DatabaseReference rideRef;
 final assetsAudioPlayer = AssetsAudioPlayer();
 StreamSubscription<Position> homeTabPositionStream;
 DatabaseReference tripRequestRef;
