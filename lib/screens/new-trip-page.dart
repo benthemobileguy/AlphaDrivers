@@ -57,64 +57,67 @@ class _NewTripPageState extends State<NewTripPage> {
                  ]
              ),
              height: Platform.isIOS? 208:255,
-             child: Column(
-               children: <Widget>[
-              Text(
-                '14 Mins',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'CircularStd',
-                  color: BrandColors.colorAccentPurple,
+             child: Padding(
+               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+               child: Column(
+                 children: <Widget>[
+                Text(
+                  '14 Mins',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'CircularStd',
+                    color: BrandColors.colorAccentPurple,
+                  ),
                 ),
-              ),
-                 SizedBox(height: 5,),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: <Widget>[
-                     Text('Daniel Jones', style: TextStyle(fontSize: 22, fontFamily: 'CircularStd'), ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Icon(Icons.call),
-                    ),
-                   ],
-                 ),
-                 SizedBox(height: 25,),
-                 Row(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: <Widget>[
-                     Image.asset('images/pickicon.png', height: 16, width: 16,),
-                     SizedBox(width: 18,),
-                     Expanded(
-                       child: Container(child:
-                       Text('NYSC Rd, Alakahia Nigeria',
-                         style: TextStyle(fontSize: 16.5, fontFamily: 'CircularStd'),)),
-                     ),
-                   ],
-                 ),
-                 SizedBox(height: 15,),
-                 Row(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: <Widget>[
-                     Image.asset('images/desticon.png', height: 16, width: 16,),
-                     SizedBox(width: 18,),
-                     Expanded(child:
-                     Container(child:
-                     Text('SPAR, PH',
-                         style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
-                   ],
-                 ),
-                 SizedBox(height: 25,),
-                 CustomCircularButtonMain(
-                   text: 'ARRIVED',
-                   fontWeight: FontWeight.w500,
-                   textColor: Colors.white,
-                   isLoading: false,
-                   backgroundColor: BrandColors.colorTextDark,
-                   onPressed: () async{
+                   SizedBox(height: 5,),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: <Widget>[
+                       Text('Daniel Jones', style: TextStyle(fontSize: 22, fontFamily: 'CircularStd'), ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Icon(Icons.call),
+                      ),
+                     ],
+                   ),
+                   SizedBox(height: 25,),
+                   Row(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: <Widget>[
+                       Image.asset('images/pickicon.png', height: 16, width: 16,),
+                       SizedBox(width: 18,),
+                       Expanded(
+                         child: Container(child:
+                         Text('NYSC Rd, Alakahia Nigeria',
+                           style: TextStyle(fontSize: 16.5, fontFamily: 'CircularStd'),)),
+                       ),
+                     ],
+                   ),
+                   SizedBox(height: 15,),
+                   Row(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: <Widget>[
+                       Image.asset('images/desticon.png', height: 16, width: 16,),
+                       SizedBox(width: 18,),
+                       Expanded(child:
+                       Container(child:
+                       Text('SPAR, PH',
+                           style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
+                     ],
+                   ),
+                   SizedBox(height: 25,),
+                   CustomCircularButtonMain(
+                     text: 'ARRIVED',
+                     fontWeight: FontWeight.w500,
+                     textColor: Colors.white,
+                     isLoading: false,
+                     backgroundColor: BrandColors.colorTextDark,
+                     onPressed: () async{
 
-                   },
-                 ),
-               ],
+                     },
+                   ),
+                 ],
+               ),
              ),
            ),
          )
