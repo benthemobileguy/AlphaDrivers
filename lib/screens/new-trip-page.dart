@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:alpha_drivers/datamodels/trip-details.dart';
+import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class NewTripPage extends StatefulWidget {
@@ -50,7 +51,14 @@ class _NewTripPageState extends State<NewTripPage> {
            height: Platform.isIOS? 208:255,
            child: Column(
              children: <Widget>[
-
+            Text(
+              '14 Mins',
+              style: TextStyle(
+                fontSize: 14,
+                fontFamily: 'CircularStd',
+                color: BrandColors.colorAccentPurple,
+              ),
+            )
              ],
            ),
          )
