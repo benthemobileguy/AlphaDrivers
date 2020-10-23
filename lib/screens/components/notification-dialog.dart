@@ -4,6 +4,7 @@ import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/screens/new-trip-page.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
+import 'package:alpha_drivers/utils/network-utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 class NotificationDialog extends StatelessWidget {
@@ -129,10 +130,12 @@ class NotificationDialog extends StatelessWidget {
       }
  if(thisRideId == tripDetails.rideId){
    newRideRef.set('accepted');
- Navigator.push(context, MaterialPageRoute(builder: (context) => NewTripPage()),
+ Navigator.push(context, MaterialPageRoute(builder:
+     (context) => NewTripPage(tripDetails: tripDetails,)),
  );
 
  } else if(thisRideId == 'cancelled'){
+   NetworkUtils.showToast("ride has been cancelled");
    print('ride has been cancelled');
 
  } else if(thisRideId == 'timeout'){
