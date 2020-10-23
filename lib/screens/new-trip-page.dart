@@ -25,7 +25,7 @@ class _NewTripPageState extends State<NewTripPage> {
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set<Marker>();
   Set<Circle> _circles = Set<Circle>();
-  Set<Polyline> _polyline = Set<Polyline>();
+  Set<Polyline> _polylines = Set<Polyline>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
