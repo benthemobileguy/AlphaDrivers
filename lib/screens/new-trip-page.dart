@@ -40,7 +40,7 @@ class _NewTripPageState extends State<NewTripPage> {
            trafficEnabled: true,
            circles: _circles,
            markers: _markers,
-           polylines: _polyline,
+           polylines: _polylines,
            onMapCreated: (GoogleMapController controller) {
              _controller.complete(controller);
              mapController = controller;
