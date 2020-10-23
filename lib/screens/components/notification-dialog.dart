@@ -73,6 +73,9 @@ class NotificationDialog extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20,),
+            Divider(
+
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -108,7 +111,7 @@ class NotificationDialog extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 40,),
           ],
         ),
       ),
@@ -127,6 +130,8 @@ class NotificationDialog extends StatelessWidget {
       if(snapshot.value !=null){
         thisRideId = snapshot.value.toString();
 
+      } else{
+        NetworkUtils.showToast("Ride not found");
       }
  if(thisRideId == tripDetails.rideId){
    newRideRef.set('accepted');
@@ -135,11 +140,12 @@ class NotificationDialog extends StatelessWidget {
  );
 
  } else if(thisRideId == 'cancelled'){
-   NetworkUtils.showToast("ride has been cancelled");
+   NetworkUtils.showToast("Ride has been cancelled");
    print('ride has been cancelled');
 
  } else if(thisRideId == 'timeout'){
 print('ride has timed out');
+NetworkUtils.showToast("Ride has timed out");
  } else{
    print('ride not found');
  }
