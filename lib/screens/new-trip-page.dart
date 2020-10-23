@@ -19,6 +19,9 @@ class NewTripPage extends StatefulWidget {
 class _NewTripPageState extends State<NewTripPage> {
   GoogleMapController mapController;
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> _markers = Set<Marker>();
+  Set<Circle> _circles = Set<Circle>();
+  Set<Polyline> _polyline = Set<Polyline>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +63,7 @@ class _NewTripPageState extends State<NewTripPage> {
              child: Padding(
                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
                child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: <Widget>[
                 Text(
                   '14 Mins',
@@ -69,11 +73,11 @@ class _NewTripPageState extends State<NewTripPage> {
                     color: BrandColors.colorAccentPurple,
                   ),
                 ),
-                   SizedBox(height: 5,),
+                   SizedBox(height: 10,),
                    Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: <Widget>[
-                       Text('Daniel Jones', style: TextStyle(fontSize: 22, fontFamily: 'CircularStd'), ),
+                       Text('Daniel Jones', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, fontFamily: 'CircularStd'), ),
                       Padding(
                         padding: EdgeInsets.only(right: 10),
                         child: Icon(Icons.call),
@@ -89,7 +93,7 @@ class _NewTripPageState extends State<NewTripPage> {
                        Expanded(
                          child: Container(child:
                          Text('NYSC Rd, Alakahia Nigeria',
-                           style: TextStyle(fontSize: 16.5, fontFamily: 'CircularStd'),)),
+                           style: TextStyle(fontSize: 16, fontFamily: 'CircularStd'),)),
                        ),
                      ],
                    ),
@@ -105,16 +109,18 @@ class _NewTripPageState extends State<NewTripPage> {
                            style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
                      ],
                    ),
-                   SizedBox(height: 25,),
-                   CustomCircularButtonMain(
-                     text: 'ARRIVED',
-                     fontWeight: FontWeight.w500,
-                     textColor: Colors.white,
-                     isLoading: false,
-                     backgroundColor: BrandColors.colorTextDark,
-                     onPressed: () async{
+                   SizedBox(height: 30,),
+                   SizedBox(
+                     child: CustomCircularButtonMain(
+                       text: 'ARRIVED',
+                       fontWeight: FontWeight.w500,
+                       textColor: Colors.white,
+                       isLoading: false,
+                       backgroundColor: BrandColors.colorTextDark,
+                       onPressed: () async{
 
-                     },
+                       },
+                     ),
                    ),
                  ],
                ),

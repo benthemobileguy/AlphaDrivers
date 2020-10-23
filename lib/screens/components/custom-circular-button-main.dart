@@ -30,7 +30,6 @@ class _CustomCircularButtonMainState extends State<CustomCircularButtonMain> {
         ),
         width: double.infinity,
         padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
-        margin: EdgeInsets.only(left: 20, right: 20),
         child: Center(
           child: !widget.isLoading?Text(
             widget.text,

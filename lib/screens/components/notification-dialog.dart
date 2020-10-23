@@ -122,7 +122,7 @@ class NotificationDialog extends StatelessWidget {
         barrierDismissible: false,
         builder: (BuildContext context) => CustomProgressDialog(status: 'Accepting request',));
     DatabaseReference newRideRef = FirebaseDatabase.instance.reference()
-        .child('drivers/${currentFirebaseUser.uid}/newtrip');
+        .child('drivers/${currentFirebaseUser.uid}/newTrip');
     newRideRef.once().then((DataSnapshot snapshot) {
       Navigator.pop(context);
       Navigator.pop(context);
