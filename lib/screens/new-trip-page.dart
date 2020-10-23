@@ -33,6 +33,9 @@ class _NewTripPageState extends State<NewTripPage> {
            myLocationEnabled: true,
            zoomGesturesEnabled: true,
            zoomControlsEnabled: true,
+           trafficEnabled: true,
+           circles: _circles,
+           markers: _markers,
            onMapCreated: (GoogleMapController controller) {
              _controller.complete(controller);
              mapController = controller;
