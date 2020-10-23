@@ -69,7 +69,32 @@ class _NewTripPageState extends State<NewTripPage> {
                     child: Icon(Icons.call),
                   ),
                  ],
-               )
+               ),
+               SizedBox(height: 25,),
+               Row(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: <Widget>[
+                   Image.asset('images/pickicon.png', height: 16, width: 16,),
+                   SizedBox(width: 18,),
+                   Expanded(
+                     child: Container(child:
+                     Text('NYSC Rd, Alakahia Nigeria',
+                       style: TextStyle(fontSize: 16.5, fontFamily: 'CircularStd'),)),
+                   ),
+                 ],
+               ),
+               SizedBox(height: 15,),
+               Row(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: <Widget>[
+                   Image.asset('images/desticon.png', height: 16, width: 16,),
+                   SizedBox(width: 18,),
+                   Expanded(child:
+                   Container(child:
+                   Text('NYSC Rd, Alakahia Nigeria',
+                       style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
+                 ],
+               ),
              ],
            ),
          )
