@@ -18,7 +18,36 @@ class _NewTripPageState extends State<NewTripPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-
+       children: <Widget>[
+         GoogleMap(
+           mapType: MapType.normal,
+           myLocationEnabled: true,
+           zoomGesturesEnabled: true,
+           zoomControlsEnabled: true,
+           onMapCreated: (GoogleMapController controller) {
+             _controller.complete(controller);
+             mapController = controller;
+           },
+         ),
+         Container(
+           decoration: BoxDecoration(
+             color: Colors.white,
+             borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                 topRight: Radius.circular((15))),
+               boxShadow: [
+                 BoxShadow(
+                   color: Colors.black26,
+                   blurRadius: 15, //soften the shadow
+                   spreadRadius: 0.5,
+                   offset: Offset(
+                     0.7, //Move to right 10 horizontally
+                     0.7, //Move to bottom 10 vertically
+                   ), //Offset
+                 ), //BoxShadow
+               ]
+           ),
+         )
+       ],
       ),
     );
   }
