@@ -1,6 +1,7 @@
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
+import 'package:alpha_drivers/screens/new-trip-page.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -128,6 +129,8 @@ class NotificationDialog extends StatelessWidget {
       }
  if(thisRideId == tripDetails.rideId){
    newRideRef.set('accepted');
+ Navigator.push(context, MaterialPageRoute(builder: (context) => NewTripPage()),
+ );
 
  } else if(thisRideId == 'cancelled'){
    print('ride has been cancelled');
