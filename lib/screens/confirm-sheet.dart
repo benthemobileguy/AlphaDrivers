@@ -65,6 +65,9 @@ class ConfirmSheet extends StatelessWidget {
                   ),
                 ),
               ),
+                SizedBox(
+                  width: 30,
+                ),
                 Expanded(
                   child: Container(
                     child: CustomCircularButtonMain(

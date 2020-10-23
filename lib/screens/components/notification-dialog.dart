@@ -76,40 +76,44 @@ class NotificationDialog extends StatelessWidget {
              color: Colors.black.withOpacity(0.5),
             ),
             SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: CustomCircularButtonMain(
-                      text: 'DECLINE',
-                      fontWeight: FontWeight.w500,
-                      textColor: Colors.white,
-                      isLoading: false,
-                      backgroundColor: BrandColors.colorTextDark,
-                      onPressed: () async{
-                        assetsAudioPlayer.stop();
-                        Navigator.pop(context);
-                      },
+            Container(
+              margin: ,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: CustomCircularButtonMain(
+                        text: 'DECLINE',
+                        fontWeight: FontWeight.w500,
+                        textColor: Colors.white,
+                        isLoading: false,
+                        backgroundColor: BrandColors.colorTextDark,
+                        onPressed: () async{
+                          assetsAudioPlayer.stop();
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: CustomCircularButtonMain(
-                      text: 'ACCEPT',
-                      fontWeight: FontWeight.w500,
-                      textColor: Colors.white,
-                      isLoading: false,
-                      backgroundColor: BrandColors.colorGreen,
-                      onPressed: () async{
-                     assetsAudioPlayer.stop();
-                     checkAvailability(context);
-                      },
+                  SizedBox(width: 20,),
+                  Expanded(
+                    child: Container(
+                      child: CustomCircularButtonMain(
+                        text: 'ACCEPT',
+                        fontWeight: FontWeight.w500,
+                        textColor: Colors.white,
+                        isLoading: false,
+                        backgroundColor: BrandColors.colorGreen,
+                        onPressed: () async{
+                       assetsAudioPlayer.stop();
+                       checkAvailability(context);
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(height: 30,),
           ],

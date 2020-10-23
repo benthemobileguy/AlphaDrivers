@@ -23,6 +23,8 @@ class _NewTripPageState extends State<NewTripPage> {
   GoogleMapController mapController;
   List<LatLng> polyLineCoordinates = [];
   Completer<GoogleMapController> _controller = Completer();
+  double mapPaddingBottom = 0;
+
   Set<Marker> _markers = Set<Marker>();
   Set<Circle> _circles = Set<Circle>();
   Set<Polyline> _polylines = Set<Polyline>();
@@ -32,6 +34,7 @@ class _NewTripPageState extends State<NewTripPage> {
       body: Stack(
        children: <Widget>[
          GoogleMap(
+           padding: EdgeInsets.only(bottom: mapPaddingBottom),
            initialCameraPosition: kGooglePlex,
            mapType: MapType.normal,
            myLocationEnabled: true,
@@ -41,12 +44,15 @@ class _NewTripPageState extends State<NewTripPage> {
            circles: _circles,
            markers: _markers,
            polylines: _polylines,
-           onMapCreated: (GoogleMapController controller) {
+           onMapCreated: (GoogleMapController controller) async{
              _controller.complete(controller);
              mapController = controller;
+             setState(() {
+               mapPaddingBottom = (Platform.isIOS) ? 255:260;
+             });
              var currentLatLng = LatLng(currentPos.latitude, currentPos.longitude);
              var pickupLatLng = widget.tripDetails.pickup;
-             getDirection(currentLatLng, pickupLatLng);
+             await getDirection(currentLatLng, pickupLatLng);
            },
          ),
          Positioned(
