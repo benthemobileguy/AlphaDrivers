@@ -72,10 +72,10 @@ class NotificationDialog extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
             Divider(
-
+             color: Colors.black.withOpacity(0.5),
             ),
+            SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -111,7 +111,7 @@ class NotificationDialog extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 30,),
           ],
         ),
       ),
