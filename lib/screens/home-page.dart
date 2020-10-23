@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
   TextEditingController textEditingController = new TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
-  Position currentPos;
 
   var availabilityText = 'GO ONLINE';
   Color availabilityColorBg = Colors.white;

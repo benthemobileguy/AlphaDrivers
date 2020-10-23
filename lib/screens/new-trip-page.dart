@@ -40,6 +40,10 @@ class _NewTripPageState extends State<NewTripPage> {
            onMapCreated: (GoogleMapController controller) {
              _controller.complete(controller);
              mapController = controller;
+             var currentLatLng = LatLng(currentPos.latitude, currentPos.longitude);
+             var pickupLatLng = widget.tripDetails.pickup;
+
+
            },
          ),
          Positioned(
