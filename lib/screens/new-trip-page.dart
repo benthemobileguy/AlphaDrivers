@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,12 @@ class _NewTripPageState extends State<NewTripPage> {
                    ), //Offset
                  ), //BoxShadow
                ]
+           ),
+           height: Platform.isIOS? 208:255,
+           child: Column(
+             children: <Widget>[
+
+             ],
            ),
          )
        ],
