@@ -189,36 +189,35 @@ class _NewTripPageState extends State<NewTripPage> {
       });
       //make polyline fit into the map
       LatLngBounds latLngBounds;
-      if (pickLatLng.latitude > destinationLatlng.latitude &&
-          pickLatLng.longitude > destination.longitude) {
+      if (pickupLatLng.latitude > destinationLatLng.latitude &&
+          pickupLatLng.longitude > destinationLatLng.longitude) {
         latLngBounds =
-            LatLngBounds(southwest: destinationLatlng, northeast: pickLatLng);
-      } else if (pickLatLng.longitude > destinationLatlng.longitude) {
+            LatLngBounds(southwest: destinationLatLng, northeast: pickupLatLng);
+      } else if (pickupLatLng.longitude > destinationLatLng.longitude) {
         latLngBounds = LatLngBounds(
-            southwest: LatLng(pickLatLng.latitude, destinationLatlng.longitude),
-            northeast: LatLng(destinationLatlng.latitude,
-                pickLatLng.longitude)); //LatLngBounds
-      } else if (pickLatLng.latitude > destinationLatlng.latitude) {
+            southwest: LatLng(pickupLatLng.latitude, destinationLatLng.longitude),
+            northeast: LatLng(destinationLatLng.latitude,
+                pickupLatLng.longitude)); //LatLngBounds
+      } else if (pickupLatLng.latitude > destinationLatLng.latitude) {
         latLngBounds = LatLngBounds(
-            southwest: LatLng(destinationLatlng.latitude, pickLatLng.longitude),
-            northeast: LatLng(pickLatLng.latitude,
-                destinationLatlng.longitude)); //LatLngBounds
+            southwest: LatLng(destinationLatLng.latitude, pickupLatLng.longitude),
+            northeast: LatLng(pickupLatLng.latitude,
+                destinationLatLng.longitude)); //LatLngBounds
       } else {
         latLngBounds = LatLngBounds(
-            southwest: pickLatLng, northeast: destinationLatlng); //LatLngBounds
+            southwest: pickupLatLng, northeast: destinationLatLng); //LatLngBounds
       }
-      _mapController
+      mapController
           .animateCamera(CameraUpdate.newLatLngBounds(latLngBounds, 70));
       //set up markers
       Marker pickUpMarker = Marker(
         markerId: MarkerId("pickup"),
-        position: pickLatLng,
+        position: pickupLatLng,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-        infoWindow: InfoWindow(title: pickup.placeName, snippet: 'My Location'),
       );
       Marker destinationMarker = Marker(
         markerId: MarkerId("destination"),
-        position: destinationLatlng,
+        position: destinationLatLng,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
         infoWindow: InfoWindow(title: pickup.placeName, snippet: 'Destination'),
       ); //Marker
