@@ -5,6 +5,8 @@ import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'components/custom-circular-button-main.dart';
 class NewTripPage extends StatefulWidget {
   final TripDetails tripDetails;
 
@@ -91,9 +93,20 @@ class _NewTripPageState extends State<NewTripPage> {
                    SizedBox(width: 18,),
                    Expanded(child:
                    Container(child:
-                   Text('NYSC Rd, Alakahia Nigeria',
+                   Text('SPAR, PH',
                        style: TextStyle(fontSize: 16, fontFamily: 'CircularStd')),)),
                  ],
+               ),
+               SizedBox(height: 25,),
+               CustomCircularButtonMain(
+                 text: 'ARRIVED',
+                 fontWeight: FontWeight.w500,
+                 textColor: Colors.white,
+                 isLoading: false,
+                 backgroundColor: BrandColors.colorTextDark,
+                 onPressed: () async{
+
+                 },
                ),
              ],
            ),
