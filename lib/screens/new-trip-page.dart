@@ -7,6 +7,7 @@ import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'components/custom-circular-button-main.dart';
@@ -20,6 +21,7 @@ class NewTripPage extends StatefulWidget {
 
 class _NewTripPageState extends State<NewTripPage> {
   GoogleMapController mapController;
+  List<LatLng> polyLineCoordinates = [];
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set<Marker>();
   Set<Circle> _circles = Set<Circle>();
@@ -154,9 +156,6 @@ class _NewTripPageState extends State<NewTripPage> {
       var thisDetails = await HelperMethods.getDirectionDetails(
           pickupLatLng, destinationLatLng);
 
-      setState(() {
-        tripDirectionDetails = thisDetails;
-      });
       Navigator.pop(context);
       PolylinePoints polylinePoints = PolylinePoints();
       List<PointLatLng> results =
