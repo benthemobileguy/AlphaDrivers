@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:alpha_drivers/datamodels/trip-details.dart';
+import 'package:alpha_drivers/helper/helper-methods.dart';
+import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,7 @@ class _NewTripPageState extends State<NewTripPage> {
              mapController = controller;
              var currentLatLng = LatLng(currentPos.latitude, currentPos.longitude);
              var pickupLatLng = widget.tripDetails.pickup;
+
 
 
            },
@@ -138,5 +141,115 @@ class _NewTripPageState extends State<NewTripPage> {
        ],
       ),
     );
+  }
+  Future<void> getDirection(LatLng pickupLatLng, LatLng destinationLatLng) async {
+
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) =>
+          CustomProgressDialog(status: 'Please wait...'),
+    );
+    try {
+      var thisDetails = await HelperMethods.getDirectionDetails(
+          pickupLatLng, destinationLatLng);
+
+      setState(() {
+        tripDirectionDetails = thisDetails;
+      });
+      Navigator.pop(context);
+      PolylinePoints polylinePoints = PolylinePoints();
+      List<PointLatLng> results =
+      polylinePoints.decodePolyline(thisDetails.encodedPoints);
+      if (results.isNotEmpty) {
+        //loop through all PointLatLng points and convert them
+        //to a list of LatLng, required by the Polyline
+        if (polyLineCoordinates != null) {
+          polyLineCoordinates.clear();
+        }
+        results.forEach((PointLatLng point) {
+          polyLineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+      }
+      //clear polylines before adding adding new one to avoid multiple instances.
+      if (_polylines != null) {
+        _polylines.clear();
+      }
+      setState(() {
+        Polyline polyline = Polyline(
+          polylineId: PolylineId('polyid'),
+          color: Color.fromARGB(255, 95, 109, 237),
+          points: polyLineCoordinates,
+          jointType: JointType.round,
+          width: 4,
+          startCap: Cap.roundCap,
+          endCap: Cap.roundCap,
+          geodesic: true,
+        ); //Polyline
+        _polylines.add(polyline);
+      });
+      //make polyline fit into the map
+      LatLngBounds latLngBounds;
+      if (pickLatLng.latitude > destinationLatlng.latitude &&
+          pickLatLng.longitude > destination.longitude) {
+        latLngBounds =
+            LatLngBounds(southwest: destinationLatlng, northeast: pickLatLng);
+      } else if (pickLatLng.longitude > destinationLatlng.longitude) {
+        latLngBounds = LatLngBounds(
+            southwest: LatLng(pickLatLng.latitude, destinationLatlng.longitude),
+            northeast: LatLng(destinationLatlng.latitude,
+                pickLatLng.longitude)); //LatLngBounds
+      } else if (pickLatLng.latitude > destinationLatlng.latitude) {
+        latLngBounds = LatLngBounds(
+            southwest: LatLng(destinationLatlng.latitude, pickLatLng.longitude),
+            northeast: LatLng(pickLatLng.latitude,
+                destinationLatlng.longitude)); //LatLngBounds
+      } else {
+        latLngBounds = LatLngBounds(
+            southwest: pickLatLng, northeast: destinationLatlng); //LatLngBounds
+      }
+      _mapController
+          .animateCamera(CameraUpdate.newLatLngBounds(latLngBounds, 70));
+      //set up markers
+      Marker pickUpMarker = Marker(
+        markerId: MarkerId("pickup"),
+        position: pickLatLng,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        infoWindow: InfoWindow(title: pickup.placeName, snippet: 'My Location'),
+      );
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("destination"),
+        position: destinationLatlng,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        infoWindow: InfoWindow(title: pickup.placeName, snippet: 'Destination'),
+      ); //Marker
+      setState(() {
+        _markers.add(pickUpMarker);
+        _markers.add(destinationMarker);
+      });
+      //set up circles
+      Circle pickUpCircle = Circle(
+        circleId: CircleId('pickup'),
+        strokeColor: Colors.green,
+        strokeWidth: 3,
+        radius: 12,
+        center: pickLatLng,
+        fillColor: BrandColors.colorGreen,
+      ); //Circle
+      Circle destinationCircle = Circle(
+        circleId: CircleId('destination'),
+        strokeColor: BrandColors.colorAccentPurple,
+        strokeWidth: 3,
+        radius: 12,
+        center: destinationLatlng,
+        fillColor: BrandColors.colorAccentPurple,
+      ); //Circle
+      setState(() {
+        _circles.add(pickUpCircle);
+        _circles.add(destinationCircle);
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
