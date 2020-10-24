@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/helper/push-notification-service.dart';
+import 'package:alpha_drivers/model/driver.dart';
 import 'package:alpha_drivers/model/location.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/components/notification-dialog.dart';
@@ -218,7 +219,7 @@ void getCurrentDriverInfo() async{
         .child('drivers/${currentFirebaseUser.uid}');
    driverRef.once().then((DataSnapshot snapshot){
      if(snapshot.value !=null){
-
+     currentDriverInfo = Driver.fromSnapshot(snapshot);
      }
    });
     PushNotificationService pushNotificationService = PushNotificationService();

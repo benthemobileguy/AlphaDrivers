@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:alpha_drivers/model/driver.dart';
 import 'package:alpha_drivers/model/user.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,7 @@ FirebaseUser currentFirebaseUser;
 User currentUserInfo;
 Position currentPos;
 DatabaseReference rideRef;
+Driver currentDriverInfo;
 final assetsAudioPlayer = AssetsAudioPlayer();
 StreamSubscription<Position> homeTabPositionStream;
 DatabaseReference tripRequestRef;

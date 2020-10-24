@@ -11,6 +11,7 @@ import 'package:alpha_drivers/utils/pref-manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdi/mdi.dart';
 
@@ -275,14 +276,17 @@ class _SignUpPageState extends State<SignUpPage> {
       setState(() {
         isSubmitting = true;
       });
-      await FirebaseAuth.instance.createUserWithEmailAndPassword
+    await FirebaseAuth.instance.createUserWithEmailAndPassword
         (email: _emailController.text, password: _passController.text)
           .catchError((e) => {
         setState(() {
           isSubmitting = false;
          NetworkUtils.showToast("This email is already in use by another account!");
         }),
-      }).then((authResult) => saveToFirestore(authResult.user.uid));
+      }).then((authResult){
+        saveToFirestore(authResult.user.uid);
+
+      });
     }
   }
 
@@ -290,6 +294,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final Firestore db = Firestore.instance;
     var userRef = db.collection("Users")
         .document(userId);
+    DatabaseReference userRef2
     userRef.setData({
       'user_id': userId,
       "role": "driver",
@@ -304,6 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     }).then((doc) {
       print("doc save successful");
+
      prefManager.setAuthToken(Constants.log1).then((value) => {
      Navigator.push(
      context,
@@ -322,4 +328,6 @@ class _SignUpPageState extends State<SignUpPage> {
       print(error);
     });
   }
+
+
 }

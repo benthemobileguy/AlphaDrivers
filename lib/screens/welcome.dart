@@ -54,17 +54,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: CustomCircularButtonMain(
-                  isLoading: false,
-                    backgroundColor: primaryColor,
-                    fontWeight: FontWeight.w700,
-                    textColor: Colors.white,
-                    text: "Sign In",
-                    onPressed: (){
-                      Navigator.push(
-                          context, SlideFromLeftPageRoute(widget:
-                      SignInPage()));
-                    },
+                  child: Container(
+                   padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomCircularButtonMain(
+                    isLoading: false,
+                      backgroundColor: primaryColor,
+                      fontWeight: FontWeight.w700,
+                      textColor: Colors.white,
+                      text: "Sign In",
+                      onPressed: (){
+                        Navigator.push(
+                            context, SlideFromLeftPageRoute(widget:
+                        SignInPage()));
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -72,17 +75,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: CustomCircularButtonMain(
-                    onPressed: (){
-                      Navigator.pushReplacement(
-                          context, SlideFromLeftPageRoute(widget:
-                      SignUpPage()));
-                    },
-                    isLoading: false,
-                    backgroundColor: Colors.transparent,
-                    fontWeight: FontWeight.w700,
-                    textColor: Colors.white,
-                    text: "Sign Up",
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomCircularButtonMain(
+                      onPressed: (){
+                        Navigator.pushReplacement(
+                            context, SlideFromLeftPageRoute(widget:
+                        SignUpPage()));
+                      },
+                      isLoading: false,
+                      backgroundColor: Colors.transparent,
+                      fontWeight: FontWeight.w700,
+                      textColor: Colors.white,
+                      text: "Sign Up",
+                    ),
                   ),
                 ),
                 SizedBox(

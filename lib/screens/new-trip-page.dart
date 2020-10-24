@@ -30,6 +30,12 @@ class _NewTripPageState extends State<NewTripPage> {
   Set<Circle> _circles = Set<Circle>();
   Set<Polyline> _polylines = Set<Polyline>();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    acceptTrip();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -258,6 +264,17 @@ class _NewTripPageState extends State<NewTripPage> {
 String rideId = widget.tripDetails.rideId;
 rideRef = FirebaseDatabase.instance.reference().child('rideRequest/$rideId');
 rideRef.child('status').set('accepted');
+rideRef.child('driver_name').set(currentDriverInfo.fullName);
+
+rideRef.child('car_details').set('${currentDriverInfo.carColor} - ${currentDriverInfo.carModel}');
+rideRef.child('driver_phone').set(currentDriverInfo.phone);
+rideRef.child('driver_id').set(currentDriverInfo.id);
+
+Map locationMap = {
+  'latitude': currentPos.latitude.toString(),
+  'longitude': currentPos.longitude.toString()
+};
+rideRef.child('driver_location').set(locationMap);
 
 
   }
