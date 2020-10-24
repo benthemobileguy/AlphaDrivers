@@ -296,7 +296,11 @@ class _SignUpPageState extends State<SignUpPage> {
         .document(userId);
     DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
         .child('Users/${userId}');
-    userRef2.once()
+    userRef2.once().then((DataSnapshot dataSnapshot) => {
+      if(dataSnapshot.value != null){
+
+      }
+    });
     userRef.setData({
       'user_id': userId,
       "role": "driver",
