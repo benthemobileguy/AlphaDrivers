@@ -294,7 +294,9 @@ class _SignUpPageState extends State<SignUpPage> {
     final Firestore db = Firestore.instance;
     var userRef = db.collection("Users")
         .document(userId);
-    DatabaseReference userRef2
+    DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
+        .child('Users/${userId}');
+    userRef2.once()
     userRef.setData({
       'user_id': userId,
       "role": "driver",
