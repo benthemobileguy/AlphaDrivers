@@ -113,16 +113,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Future<bool> checkIfDocExists(String userId) async {
     try {
       // Get reference to Firestore collection
-      var collectionRef = Firestore.instance.collection('Vehicles').document();
-      if(collectionRef!=null){
-        Navigator.pushReplacement(
-            context, SlideFromLeftPageRoute(widget:
-        HomePage()));
-      } else{
-        Navigator.pushReplacement(
-            context, SlideFromLeftPageRoute(widget:
-        RegisterDriverPage()));
-      }
+      var collectionRef = await Firestore.instance.collection('Vehicles')
+          .document().get().then((doc) => {
+            if(doc.exists){
+          Navigator.pushReplacement(
+          context, SlideFromLeftPageRoute(widget:
+          HomePage())),
+            }else{
+          Navigator.pushReplacement(
+          context, SlideFromLeftPageRoute(widget:
+          RegisterDriverPage()))
+            }
+      });
     } catch (e) {
       throw e;
     }

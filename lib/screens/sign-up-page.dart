@@ -300,6 +300,18 @@ class _SignUpPageState extends State<SignUpPage> {
     Map userMap = {
       'user_id': userId,
       "role": "driver",
+      'createdAt': DateTime.now().millisecondsSinceEpoch,
+      'platform': Platform.operatingSystem,
+      'names': _nameController.text.trim(),
+      'email': _emailController.text.trim(),
+      'phone': _phoneController.text.trim(),
+      'password': _passController.text.trim(),
+      "imageurl":"default",
+      "Address":_addressController.text,
+    };
+    Map<String, dynamic> userMap2 = {
+      'user_id': userId,
+      "role": "driver",
       'createdAt': FieldValue.serverTimestamp(),
       'platform': Platform.operatingSystem,
       'names': _nameController.text.trim(),
@@ -317,7 +329,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }).then((doc) {
 
       print("doc save successful");
-      userRef.setData(userMap);
+      userRef.setData(userMap2);
      prefManager.setAuthToken(Constants.log1).then((value) => {
      Navigator.push(
      context,
@@ -326,12 +338,12 @@ class _SignUpPageState extends State<SignUpPage> {
      });
       setState(() {
         isSubmitting = false;
-        NetworkUtils.showToast("Request timed out. Please try again");
+        NetworkUtils.showToast("success");
       });
-    }).timeout(Duration(seconds:10)).catchError((error) {
+    }).timeout(Duration(seconds:20)).catchError((error) {
       setState(() {
         isSubmitting = false;
-        NetworkUtils.showToast("Request timed out. Please try again");
+        NetworkUtils.showToast(error.toString());
       });
       print(error);
     });
