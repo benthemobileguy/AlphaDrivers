@@ -9,6 +9,7 @@ import 'package:alpha_drivers/utils/network-utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloudinary_client/cloudinary_client.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mdi/mdi.dart';
@@ -484,6 +485,14 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
     final FirebaseUser user = await auth.currentUser();
     var userRef = db.collection("Vehicles")
         .document(user.uid);
+    DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
+        .child('drivers/${user.uid}');
+    Map carData = {
+      'vehicle_name': _vehicleNameController.text,
+      'vehicle_color': _vehicleColorController.text,
+      'plate_number': _plateNumberController.text,
+      'vehicle_image': _images[0]
+    };
     userRef.setData({
       'user_id': user.uid,
       "bank_name": _bankController.text,

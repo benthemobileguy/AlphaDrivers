@@ -114,7 +114,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       // Get reference to Firestore collection
       await Firestore.instance
           .collection('Vehicles')
-          .document()
+          .document(userId)
           .get()
           .then((doc) => {
                 if (doc.exists)

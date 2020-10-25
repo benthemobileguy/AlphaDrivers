@@ -287,13 +287,13 @@ class _SignUpPageState extends State<SignUpPage> {
          NetworkUtils.showToast(e.toString());
         }),
       }).then((authResult){
-        saveToFirestore(authResult.user.uid);
+        saveToDatabase(authResult.user.uid);
 
       });
     }
   }
 
-  FutureOr Function(AuthResult value) saveToFirestore(String userId) {
+  FutureOr Function(AuthResult value) saveToDatabase(String userId) {
     final Firestore db = Firestore.instance;
     var userRef = db.collection("Users")
         .document(userId);

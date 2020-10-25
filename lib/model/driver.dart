@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class Driver{
-String fullName;
+String names;
 String email;
 String phone;
 String id;
@@ -11,7 +11,7 @@ String vehicleModel;
 
 Driver({
   this.id,
-  this.fullName,
+  this.names,
   this.phone,
   this.email,
   this.carColor,
@@ -22,7 +22,7 @@ Driver.fromSnapshot(DataSnapshot snapshot){
   id = snapshot.key;
   phone = snapshot.value['phone'];
   email = snapshot.value['email'];
-  fullName = snapshot.value['full_name'];
+  names = snapshot.value['names'];
   carModel = snapshot.value['vehicle_details'];
   carColor= snapshot.value['vehicle_details'];
 }
