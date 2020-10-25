@@ -8,6 +8,7 @@ import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'components/custom-circular-button-main.dart';
 class NewTripPage extends StatefulWidget {
@@ -23,6 +24,9 @@ class _NewTripPageState extends State<NewTripPage> {
   List<LatLng> polyLineCoordinates = [];
   Completer<GoogleMapController> _controller = Completer();
   double mapPaddingBottom = 0;
+
+  var geoLocator = Geolocator();
+  var locationOptions = LocationOptions(accuracy: LocationAccuracy.bestForNavigation);
 
   Set<Marker> _markers = Set<Marker>();
   Set<Circle> _circles = Set<Circle>();
