@@ -164,30 +164,36 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 35,
                     ),
-                    CustomCircularButtonMain(
-                      onPressed: (){
-                        submitForm();
-                      },
-                      fontWeight: FontWeight.w700,
-                      isLoading: isLoading,
-                      text: "Sign In",
-                      backgroundColor: Colors.white,
-                      textColor: primaryColor,
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomCircularButtonMain(
+                        onPressed: (){
+                          submitForm();
+                        },
+                        fontWeight: FontWeight.w700,
+                        isLoading: isLoading,
+                        text: "Sign In",
+                        backgroundColor: Colors.white,
+                        textColor: primaryColor,
+                      ),
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    CustomCircularButtonMain(
-                      onPressed: (){
-                        Navigator.pushReplacement(
-                            context, SlideFromLeftPageRoute(widget:
-                        SignUpPage()));
-                      },
-                      isLoading: false,
-                      backgroundColor: Colors.transparent,
-                      fontWeight: FontWeight.w700,
-                      textColor: Colors.white,
-                      text: "Sign Up",
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomCircularButtonMain(
+                        onPressed: (){
+                          Navigator.pushReplacement(
+                              context, SlideFromLeftPageRoute(widget:
+                          SignUpPage()));
+                        },
+                        isLoading: false,
+                        backgroundColor: Colors.transparent,
+                        fontWeight: FontWeight.w700,
+                        textColor: Colors.white,
+                        text: "Sign Up",
+                      ),
                     ),
                   ],
                 ),

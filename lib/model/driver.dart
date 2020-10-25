@@ -5,23 +5,23 @@ String names;
 String email;
 String phone;
 String id;
-String vehicleName;
-String vehicleColor;
+String vehicle_name;
+String vehicle_color;
 
 Driver({
   this.id,
   this.names,
   this.phone,
   this.email,
-  this.vehicleColor,
-  this.vehicleName,
+  this.vehicle_color,
+  this.vehicle_name,
 });
 Driver.fromSnapshot(DataSnapshot snapshot){
   id = snapshot.key;
   phone = snapshot.value['phone'];
   email = snapshot.value['email'];
   names = snapshot.value['names'];
-  vehicleName = snapshot.value['vehicle_name'];
-  vehicleColor= snapshot.value['vehicle_color'];
+  vehicle_name = snapshot.value['vehicle_name'];
+  vehicle_color= snapshot.value['vehicle_color'];
 }
 }

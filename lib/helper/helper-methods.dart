@@ -30,6 +30,7 @@ class HelperMethods{
         '&key=AIzaSyCjbtso15L1Q0CMtHGTV5PTgWKLnddfbPI';
     print(url);
     var response = await RequestHelper.getRequest(url);
+    print(response);
     if (response == 'failed') {
       return null;
     }
@@ -44,5 +45,7 @@ class HelperMethods{
     return directionDetails;
 
   }
+ static void disableHomeTabLocationUpdates(){
 
+}
 }

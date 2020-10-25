@@ -140,7 +140,7 @@ class _NewTripPageState extends State<NewTripPage> {
                        fontWeight: FontWeight.w500,
                        textColor: Colors.white,
                        isLoading: false,
-                       backgroundColor: BrandColors.colorTextDark,
+                       backgroundColor: BrandColors.colorGreen,
                        onPressed: () async{
 
                        },
@@ -257,16 +257,16 @@ class _NewTripPageState extends State<NewTripPage> {
         _circles.add(destinationCircle);
       });
     } catch (e) {
-      print(e.toString());
+      print("Error:" + e.toString());
     }
   }
   void acceptTrip(){
 String rideId = widget.tripDetails.rideId;
-rideRef = FirebaseDatabase.instance.reference().child('rideRequest/$rideId');
+rideRef = FirebaseDatabase.instance.reference().child('RideRequest/$rideId');
 rideRef.child('status').set('accepted');
 rideRef.child('driver_name').set(currentDriverInfo.names);
-
-rideRef.child('car_details').set('${currentDriverInfo.vehicleColor} - ${currentDriverInfo.vehicleName}');
+rideRef.child('car_details').set('${currentDriverInfo.vehicle_color} -'
+    ' ${currentDriverInfo.vehicle_name}');
 rideRef.child('driver_phone').set(currentDriverInfo.phone);
 rideRef.child('driver_id').set(currentDriverInfo.id);
 
