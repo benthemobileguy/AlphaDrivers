@@ -4,6 +4,7 @@ import 'package:alpha_drivers/model/user.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HelperMethods{
@@ -46,6 +47,7 @@ class HelperMethods{
 
   }
  static void disableHomeTabLocationUpdates(){
-
+homeTabPositionStream.pause();
+Geofire.removeLocation(currentFirebaseUser.uid);
 }
 }
