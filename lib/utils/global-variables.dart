@@ -12,6 +12,7 @@ User currentUserInfo;
 Position currentPos;
 DatabaseReference rideRef;
 Driver currentDriverInfo;
+StreamSubscription<Position> ridePositionStream;
 final assetsAudioPlayer = AssetsAudioPlayer();
 StreamSubscription<Position> homeTabPositionStream;
 DatabaseReference tripRequestRef;
