@@ -31,6 +31,8 @@ class _NewTripPageState extends State<NewTripPage> {
   Set<Marker> _markers = Set<Marker>();
   Set<Circle> _circles = Set<Circle>();
   Set<Polyline> _polylines = Set<Polyline>();
+
+  BitmapDescriptor movingMarkerIcon;
   @override
   void initState() {
     // TODO: implement initState
@@ -280,5 +282,18 @@ rideRef.child('driver_location').set(locationMap);
 
 
   }
+  void createMarker(){
+    if(movingMarkerIcon ==null){
+      ImageConfiguration imageConfiguration =
+      createLocalImageConfiguration(context, size: Size(2,2));
+      BitmapDescriptor.fromAssetImage(imageConfiguration, (Platform.isIOS) ?
+      'assets/car_ios.png'
+          : 'assets/car_android.png')
+          .then((icon) {
+        movingMarkerIcon = icon;
 
+      });
+
+    }
+  }
 }
