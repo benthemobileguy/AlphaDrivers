@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
@@ -10,7 +9,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'components/custom-circular-button-main.dart';
 class NewTripPage extends StatefulWidget {
   final TripDetails tripDetails;
