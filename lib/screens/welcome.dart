@@ -8,6 +8,7 @@ import 'package:alpha_drivers/theme/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -20,6 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     super.initState();
     getUser();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 image: AssetImage("images/bg_welcome.png"), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.black.withOpacity(0.3),
-          body:  Padding(
+          body: Padding(
             padding: const EdgeInsets.only(top: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,23 +51,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                Spacer(
-
-                ),
+                Spacer(),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                   padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: CustomCircularButtonMain(
-                    isLoading: false,
+                      isLoading: false,
                       backgroundColor: primaryColor,
                       fontWeight: FontWeight.w700,
                       textColor: Colors.white,
                       text: "Sign In",
-                      onPressed: (){
-                        Navigator.push(
-                            context, SlideFromLeftPageRoute(widget:
-                        SignInPage()));
+                      onPressed: () {
+                        Navigator.push(context,
+                            SlideFromLeftPageRoute(widget: SignInPage()));
                       },
                     ),
                   ),
@@ -78,10 +77,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: CustomCircularButtonMain(
-                      onPressed: (){
-                        Navigator.pushReplacement(
-                            context, SlideFromLeftPageRoute(widget:
-                        SignUpPage()));
+                      onPressed: () {
+                        Navigator.pushReplacement(context,
+                            SlideFromLeftPageRoute(widget: SignUpPage()));
                       },
                       isLoading: false,
                       backgroundColor: Colors.transparent,
@@ -97,34 +95,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ],
             ),
           ),
-
         ),
       ),
     );
   }
 
-  void getUser() async{
-   FirebaseUser currentFirebaseUser = await FirebaseAuth.instance.currentUser();
+  void getUser() async {
+    FirebaseUser currentFirebaseUser =
+        await FirebaseAuth.instance.currentUser();
 
-    if(currentFirebaseUser!=null){
+    if (currentFirebaseUser != null) {
       checkIfDocExists(currentFirebaseUser.uid);
     }
   }
+
   Future<bool> checkIfDocExists(String userId) async {
     try {
       // Get reference to Firestore collection
-      var collectionRef = await Firestore.instance.collection('Vehicles')
-          .document().get().then((doc) => {
-            if(doc.exists){
-          Navigator.pushReplacement(
-          context, SlideFromLeftPageRoute(widget:
-          HomePage())),
-            }else{
-          Navigator.pushReplacement(
-          context, SlideFromLeftPageRoute(widget:
-          RegisterDriverPage()))
-            }
-      });
+      await Firestore.instance
+          .collection('Vehicles')
+          .document()
+          .get()
+          .then((doc) => {
+                if (doc.exists)
+                  {
+                    Navigator.pushReplacement(
+                        context, SlideFromLeftPageRoute(widget: HomePage())),
+                  }
+                else
+                  {
+                    Navigator.pushReplacement(context,
+                        SlideFromLeftPageRoute(widget: RegisterDriverPage()))
+                  }
+              });
     } catch (e) {
       throw e;
     }
