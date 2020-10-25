@@ -487,7 +487,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
         .document(user.uid);
     DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
         .child('drivers/${user.uid}');
-    Map carData = {
+    Map<String, dynamic> carData = {
       'vehicle_name': _vehicleNameController.text,
       'vehicle_color': _vehicleColorController.text,
       'plate_number': _plateNumberController.text,
