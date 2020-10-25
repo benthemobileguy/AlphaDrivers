@@ -266,7 +266,7 @@ rideRef = FirebaseDatabase.instance.reference().child('rideRequest/$rideId');
 rideRef.child('status').set('accepted');
 rideRef.child('driver_name').set(currentDriverInfo.names);
 
-rideRef.child('car_details').set('${currentDriverInfo.carColor} - ${currentDriverInfo.carModel}');
+rideRef.child('car_details').set('${currentDriverInfo.vehicleColor} - ${currentDriverInfo.vehicleModel}');
 rideRef.child('driver_phone').set(currentDriverInfo.phone);
 rideRef.child('driver_id').set(currentDriverInfo.id);
 
