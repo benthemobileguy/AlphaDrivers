@@ -248,15 +248,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  CustomCircularButtonMain(
-                    onPressed: (){
-                      submitForm();
-                    },
-                    fontWeight: FontWeight.w700,
-                    isLoading: isSubmitting,
-                    text: "Sign Up",
-                    backgroundColor: Colors.white,
-                    textColor: primaryColor,
+                  Container(
+                    ma
+                    child: CustomCircularButtonMain(
+                      onPressed: (){
+                        submitForm();
+                      },
+                      fontWeight: FontWeight.w700,
+                      isLoading: isSubmitting,
+                      text: "Sign Up",
+                      backgroundColor: Colors.white,
+                      textColor: primaryColor,
+                    ),
                   ),
                   SizedBox(
                     height: 30,
@@ -294,9 +297,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final Firestore db = Firestore.instance;
     var userRef = db.collection("Users")
         .document(userId);
-    DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
-        .child('drivers/${userId}');
-    userRef.setData({
+    Map userMap = {
       'user_id': userId,
       "role": "driver",
       'createdAt': FieldValue.serverTimestamp(),
@@ -307,10 +308,16 @@ class _SignUpPageState extends State<SignUpPage> {
       'password': _passController.text.trim(),
       "imageurl":"default",
       "Address":_addressController.text,
+    };
+    DatabaseReference userRef2 = FirebaseDatabase.instance.reference()
+        .child('drivers/${userId}');
+
+    userRef2.set(userMap).then((value) => {
 
     }).then((doc) {
-      print("doc save successful");
 
+      print("doc save successful");
+      userRef.setData(userMap);
      prefManager.setAuthToken(Constants.log1).then((value) => {
      Navigator.push(
      context,
