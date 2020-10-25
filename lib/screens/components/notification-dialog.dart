@@ -1,4 +1,5 @@
 import 'package:alpha_drivers/datamodels/trip-details.dart';
+import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/screens/components/custom-circular-button-main.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/screens/new-trip-page.dart';
@@ -139,6 +140,7 @@ class NotificationDialog extends StatelessWidget {
       }
  if(thisRideId == tripDetails.rideId){
    newRideRef.set('accepted');
+   HelperMethods.disableHomeTabLocationUpdates();
  Navigator.push(context, MaterialPageRoute(builder:
      (context) => NewTripPage(tripDetails: tripDetails,)),
  );
