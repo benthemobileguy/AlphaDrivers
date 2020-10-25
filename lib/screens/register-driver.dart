@@ -506,6 +506,7 @@ class _RegisterDriverPageState extends State<RegisterDriverPage> {
 
     }).then((doc) {
       print("doc save successful");
+      userRef2.update(carData);
       Navigator.pushReplacement(
           context, SlideFromLeftPageRoute(widget:
       HomePage()));
