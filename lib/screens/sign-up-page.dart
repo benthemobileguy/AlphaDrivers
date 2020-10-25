@@ -249,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 35,
                   ),
                   Container(
-                    ma
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: CustomCircularButtonMain(
                       onPressed: (){
                         submitForm();
@@ -284,7 +284,7 @@ class _SignUpPageState extends State<SignUpPage> {
           .catchError((e) => {
         setState(() {
           isSubmitting = false;
-         NetworkUtils.showToast("This email is already in use by another account!");
+         NetworkUtils.showToast(e.toString());
         }),
       }).then((authResult){
         saveToFirestore(authResult.user.uid);
