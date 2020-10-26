@@ -1,9 +1,11 @@
 import 'package:alpha_drivers/datamodels/direction-details.dart';
 import 'package:alpha_drivers/helper/request-helper.dart';
 import 'package:alpha_drivers/model/user.dart';
+import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -62,5 +64,12 @@ class HelperMethods {
     homeTabPositionStream.resume();
     Geofire.setLocation(
         currentFirebaseUser.uid, currentPos.latitude, currentPos.latitude);
+  }
+  static void showProgressDialog(context){
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) =>
+          CustomProgressDialog(status:'Fetching details',),);
   }
 }
