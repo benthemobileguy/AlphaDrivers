@@ -25,6 +25,8 @@ class _NewTripPageState extends State<NewTripPage> {
   GoogleMapController mapController;
   List<LatLng> polyLineCoordinates = [];
 
+  Timer timer;
+  int durationCounter = 0;
   String buttonTitle = 'ARRIVED';
   Color buttonColor = BrandColors.colorGreen;
   Completer<GoogleMapController> _controller = Completer();
@@ -201,6 +203,15 @@ class _NewTripPageState extends State<NewTripPage> {
                          await getDirection(widget.tripDetails.pickup, widget.tripDetails.destination);
                          HelperMethods.showProgressDialog(context);
                          Navigator.pop(context);
+                        }
+                        else if(status == 'arrived'){
+                          status == 'ontrip';
+                            rideRef.child('status').set('ontrip');
+                            setState(() {
+                              buttonTitle = 'END TRIP';
+                              buttonColor = Colors.red[900];
+                            });
+                            startTimer();
                         }
                         },
                       ),
@@ -414,5 +425,11 @@ class _NewTripPageState extends State<NewTripPage> {
       }
       isRequestingDirection = false;
     }
+  }
+  void startTimer(){
+    const interval = Duration(seconds: 1);
+    timer = Timer.periodic(interval, (timer) {
+      durationCounter++;
+    });
   }
 }
