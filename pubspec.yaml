@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^0.1.3
   provider: ^3.2.0
   firebase_core: ^0.4.5
+  maps_toolkit: ^1.1.0+2
   flutter_geofire: ^1.0.3
   firebase_messaging: ^6.0.16
   assets_audio_player: 2.0.1

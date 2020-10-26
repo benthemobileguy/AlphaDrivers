@@ -69,6 +69,7 @@ class _NewTripPageState extends State<NewTripPage> {
                   LatLng(currentPos.latitude, currentPos.longitude);
               var pickupLatLng = widget.tripDetails.pickup;
               await getDirection(currentLatLng, pickupLatLng);
+              getLocationUpdates();
             },
           ),
           Positioned(
@@ -328,8 +329,8 @@ class _NewTripPageState extends State<NewTripPage> {
       BitmapDescriptor.fromAssetImage(
               imageConfiguration,
               (Platform.isIOS)
-                  ? 'assets/car_ios.png'
-                  : 'assets/car_android.png')
+                  ? 'images/car_ios.png'
+                  : 'images/car_android.png')
           .then((icon) {
         movingMarkerIcon = icon;
       });
@@ -344,7 +345,7 @@ class _NewTripPageState extends State<NewTripPage> {
       currentPos = position;
       LatLng pos = LatLng(position.latitude, position.longitude);
       Marker movingMarker = Marker(
-      markerId: MarkerId('moving'),
+      markerId: MarkerId('moving '),
         position: pos,
         icon: movingMarkerIcon,
         infoWindow: InfoWindow(title: 'Current Location')
