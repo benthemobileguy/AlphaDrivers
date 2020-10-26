@@ -27,6 +27,7 @@ class _NewTripPageState extends State<NewTripPage> {
   Completer<GoogleMapController> _controller = Completer();
   double mapPaddingBottom = 0;
   String status = 'accepted';
+  String durationString = '';
   Position myPosition;
   var geoLocator = Geolocator();
   var locationOptions =
@@ -102,7 +103,7 @@ class _NewTripPageState extends State<NewTripPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      '14 Mins',
+                      durationString,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'CircularStd',
@@ -378,7 +379,9 @@ class _NewTripPageState extends State<NewTripPage> {
     }
     var directionDetails = await HelperMethods.getDirectionDetails(positionLatLng, destinationLatLng);
     if(directionDetails == null){
-
+     setState(() {
+       durationString = directionDetails.durationText;
+     });
     }
   }
 }
