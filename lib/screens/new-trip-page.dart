@@ -24,6 +24,9 @@ class NewTripPage extends StatefulWidget {
 class _NewTripPageState extends State<NewTripPage> {
   GoogleMapController mapController;
   List<LatLng> polyLineCoordinates = [];
+
+  String buttonTitle = 'ARRIVED';
+  Color buttonColor = BrandColors.colorGreen;
   Completer<GoogleMapController> _controller = Completer();
   double mapPaddingBottom = 0;
   String status = 'accepted';
@@ -38,6 +41,8 @@ class _NewTripPageState extends State<NewTripPage> {
   Set<Polyline> _polylines = Set<Polyline>();
 
   BitmapDescriptor movingMarkerIcon;
+
+  bool isRequestingDirection = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -180,12 +185,22 @@ class _NewTripPageState extends State<NewTripPage> {
                     ),
                     SizedBox(
                       child: CustomCircularButtonMain(
-                        text: 'ARRIVED',
+                        text: buttonTitle,
                         fontWeight: FontWeight.w500,
                         textColor: Colors.white,
                         isLoading: false,
-                        backgroundColor: BrandColors.colorGreen,
-                        onPressed: () async {},
+                        backgroundColor: buttonColor,
+                        onPressed: () async {
+                        if(status == 'accepted'){
+                          status = 'arrived';
+                          rideRef.child('status').set(('arrived'));
+                          setState(() {
+                            buttonTitle = 'START TRIP';
+                            buttonColor = BrandColors.colorAccentPurple;
+                          });
+
+                        }
+                        },
                       ),
                     ),
                   ],
@@ -366,22 +381,36 @@ class _NewTripPageState extends State<NewTripPage> {
         _markers.add(movingMarker);
       });
       oldPosition = pos;
+      updateTripDetails();
+      Map locationMap = {
+        'latitude': myPosition.latitude.toString(),
+        'longitude': myPosition.longitude.toString()
+      };
+      rideRef.child('driver_location').set(locationMap);
     });
   }
 
-  void updateTripDetails() async{
-    var positionLatLng = LatLng(myPosition.latitude, myPosition.longitude);
-    LatLng destinationLatLng;
-    if(status =='accepted'){
-      destinationLatLng = widget.tripDetails.pickup;
-    } else{
-      destinationLatLng = widget.tripDetails.destination;
-    }
-    var directionDetails = await HelperMethods.getDirectionDetails(positionLatLng, destinationLatLng);
-    if(directionDetails == null){
-     setState(() {
-       durationString = directionDetails.durationText;
-     });
+  void updateTripDetails() async {
+    if (!isRequestingDirection) {
+      isRequestingDirection = true;
+      if (myPosition == null) {
+        return;
+      }
+      var positionLatLng = LatLng(myPosition.latitude, myPosition.longitude);
+      LatLng destinationLatLng;
+      if (status == 'accepted') {
+        destinationLatLng = widget.tripDetails.pickup;
+      } else {
+        destinationLatLng = widget.tripDetails.destination;
+      }
+      var directionDetails = await HelperMethods.getDirectionDetails(
+          positionLatLng, destinationLatLng);
+      if (directionDetails != null) {
+        setState(() {
+          durationString = directionDetails.durationText;
+        });
+      }
+      isRequestingDirection = false;
     }
   }
 }
