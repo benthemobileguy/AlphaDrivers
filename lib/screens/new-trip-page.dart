@@ -198,7 +198,7 @@ class _NewTripPageState extends State<NewTripPage> {
                             buttonTitle = 'START TRIP';
                             buttonColor = BrandColors.colorAccentPurple;
                           });
-
+                         await getDirection(widget.tripDetails.pickup, widget.tripDetails.destination);
                         }
                         },
                       ),
