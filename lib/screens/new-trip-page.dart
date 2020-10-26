@@ -26,6 +26,7 @@ class _NewTripPageState extends State<NewTripPage> {
   List<LatLng> polyLineCoordinates = [];
   Completer<GoogleMapController> _controller = Completer();
   double mapPaddingBottom = 0;
+  String status = 'accepted';
   Position myPosition;
   var geoLocator = Geolocator();
   var locationOptions =
@@ -339,7 +340,7 @@ class _NewTripPageState extends State<NewTripPage> {
   }
 
   void getLocationUpdates() {
-    LatLng oldPosition = LatLng(0,0);
+    LatLng oldPosition = LatLng(0, 0);
     ridePositionStream = geoLocator
         .getPositionStream(locationOptions)
         .listen((Position position) {
@@ -366,9 +367,15 @@ class _NewTripPageState extends State<NewTripPage> {
       oldPosition = pos;
     });
   }
-void updateTripDetails(){
+
+  void updateTripDetails() async{
     var positionLatLng = LatLng(myPosition.latitude, myPosition.longitude);
-
-}
-
+    LatLng destinationLatLng;
+    if(status =='accepted'){
+      destinationLatLng = widget.tripDetails.pickup;
+    } else{
+      destinationLatLng = widget.tripDetails.destination;
+    }
+    var directionDetails = await HelperMethods.getDirectionDetails(positionLatLng, destinationLatLng);
+  }
 }
