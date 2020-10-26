@@ -350,6 +350,7 @@ class _NewTripPageState extends State<NewTripPage> {
           oldPosition.longitude, pos.latitude, pos.longitude);
       Marker movingMarker = Marker(
           markerId: MarkerId('moving '),
+          rotation: rotation,
           position: pos,
           icon: movingMarkerIcon,
           infoWindow: InfoWindow(title: 'Current Location'));
@@ -362,6 +363,12 @@ class _NewTripPageState extends State<NewTripPage> {
         _markers.removeWhere((marker) => marker.markerId.value == 'moving');
         _markers.add(movingMarker);
       });
+      oldPosition = pos;
     });
   }
+void updateTripDetails(){
+    var positionLatLng = LatLng(myPosition.latitude, myPosition.longitude);
+
+}
+
 }
