@@ -377,5 +377,8 @@ class _NewTripPageState extends State<NewTripPage> {
       destinationLatLng = widget.tripDetails.destination;
     }
     var directionDetails = await HelperMethods.getDirectionDetails(positionLatLng, destinationLatLng);
+    if(directionDetails == null){
+
+    }
   }
 }
