@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
+import 'package:alpha_drivers/helper/map-kit-helper.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -338,21 +339,25 @@ class _NewTripPageState extends State<NewTripPage> {
   }
 
   void getLocationUpdates() {
+    LatLng oldPosition = LatLng(0,0);
     ridePositionStream = geoLocator
         .getPositionStream(locationOptions)
         .listen((Position position) {
       myPosition = position;
       currentPos = position;
       LatLng pos = LatLng(position.latitude, position.longitude);
+      var rotation = MapKitHelper.getMarkerRotation(oldPosition.latitude,
+          oldPosition.longitude, pos.latitude, pos.longitude);
       Marker movingMarker = Marker(
-      markerId: MarkerId('moving '),
-        position: pos,
-        icon: movingMarkerIcon,
-        infoWindow: InfoWindow(title: 'Current Location')
-      );
+          markerId: MarkerId('moving '),
+          position: pos,
+          icon: movingMarkerIcon,
+          infoWindow: InfoWindow(title: 'Current Location'));
       setState(() {
-        CameraPosition cameraPosition = new CameraPosition(target: pos, zoom: 17);
-        mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+        CameraPosition cameraPosition =
+            new CameraPosition(target: pos, zoom: 17);
+        mapController
+            .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
         _markers.removeWhere((marker) => marker.markerId.value == 'moving');
         _markers.add(movingMarker);
