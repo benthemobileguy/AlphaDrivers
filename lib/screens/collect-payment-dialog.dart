@@ -1,4 +1,5 @@
 import 'package:alpha_drivers/helper/helper-methods.dart';
+import 'package:alpha_drivers/helper/math-converter.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class CollectPayment extends StatelessWidget {
             ),
             SizedBox(height: 16,),
             Text(
-              '\N$fares',
+              '\N${MathConverter.intToHundred(fares)}',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'CircularStd',
