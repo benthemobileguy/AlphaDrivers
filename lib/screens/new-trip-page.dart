@@ -154,7 +154,7 @@ class _NewTripPageState extends State<NewTripPage> {
                         Expanded(
                           child: Container(
                               child: Text(
-                            'NYSC Rd, Alakahia Nigeria',
+                                widget.tripDetails.pickupAddress,
                             style: TextStyle(
                                 fontSize: 16, fontFamily: 'CircularStd'),
                           )),
@@ -177,7 +177,7 @@ class _NewTripPageState extends State<NewTripPage> {
                         ),
                         Expanded(
                             child: Container(
-                          child: Text('SPAR, PH',
+                          child: Text(widget.tripDetails.destinationAddress,
                               style: TextStyle(
                                   fontSize: 16, fontFamily: 'CircularStd')),
                         )),
@@ -194,29 +194,28 @@ class _NewTripPageState extends State<NewTripPage> {
                         isLoading: false,
                         backgroundColor: buttonColor,
                         onPressed: () async {
-                        if(status == 'accepted'){
-                          status = 'arrived';
-                          rideRef.child('status').set(('arrived'));
-                          setState(() {
-                            buttonTitle = 'START TRIP';
-                            buttonColor = BrandColors.colorAccentPurple;
-                          });
-                         await getDirection(widget.tripDetails.pickup, widget.tripDetails.destination);
-                         HelperMethods.showProgressDialog(context);
-                         Navigator.pop(context);
-                        }
-                        else if(status == 'arrived'){
-                          status == 'ontrip';
+                          if (status == 'accepted') {
+                            status = 'arrived';
+                            rideRef.child('status').set(('arrived'));
+                            setState(() {
+                              buttonTitle = 'START TRIP';
+                              buttonColor = BrandColors.colorAccentPurple;
+                            });
+                            await getDirection(widget.tripDetails.pickup,
+                                widget.tripDetails.destination);
+                            HelperMethods.showProgressDialog(context);
+                            Navigator.pop(context);
+                          } else if (status == 'arrived') {
+                            status == 'ontrip';
                             rideRef.child('status').set('ontrip');
                             setState(() {
                               buttonTitle = 'END TRIP';
                               buttonColor = Colors.red[900];
                             });
                             startTimer();
-                        }
-                        else if(status == 'ontrip'){
-                          endTrip();
-                        }
+                          } else if (status == 'ontrip') {
+                            endTrip();
+                          }
                         },
                       ),
                     ),
@@ -430,18 +429,20 @@ class _NewTripPageState extends State<NewTripPage> {
       isRequestingDirection = false;
     }
   }
-  void startTimer(){
+
+  void startTimer() {
     const interval = Duration(seconds: 1);
     timer = Timer.periodic(interval, (timer) {
       durationCounter++;
     });
   }
-  void endTrip() async{
+
+  void endTrip() async {
     timer.cancel();
     HelperMethods.showProgressDialog(context);
     var currentLatLng = LatLng(myPosition.latitude, myPosition.longitude);
-    var directionDetails = await HelperMethods.getDirectionDetails(widget.tripDetails.pickup,
-        widget.tripDetails.destination);
+    var directionDetails = await HelperMethods.getDirectionDetails(
+        widget.tripDetails.pickup, widget.tripDetails.destination);
     Navigator.pop(context);
     int fares = HelperMethods.estimateFares(directionDetails, durationCounter);
     rideRef.child('fares').set(fares.toString());
@@ -450,10 +451,27 @@ class _NewTripPageState extends State<NewTripPage> {
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (BuildContext context) =>
-          CollectPayment(paymentMethod: widget.tripDetails.paymentMethod,
-          fares: fares,),
+      builder: (BuildContext context) => CollectPayment(
+        paymentMethod: widget.tripDetails.paymentMethod,
+        fares: fares,
+      ),
     );
+    topUpEarnings(fares);
+  }
 
+  void topUpEarnings(int fares) {
+    DatabaseReference earningsRef = FirebaseDatabase.instance
+        .reference()
+        .child('drivers/${currentFirebaseUser.uid}/earnings');
+    earningsRef.once().then((DataSnapshot snapshot) {
+      if (snapshot.value != null) {
+        double oldEarnings = double.parse(snapshot.value.toString());
+        double adjustedFares = (fares.toDouble() * 0.85) + oldEarnings;
+        earningsRef.set(adjustedFares.toStringAsFixed(2));
+      } else {
+        double adjustedFares = (fares.toDouble() * 0.85);
+        earningsRef.set(adjustedFares.toStringAsFixed(2));
+      }
+    });
   }
 }
