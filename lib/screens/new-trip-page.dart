@@ -213,6 +213,9 @@ class _NewTripPageState extends State<NewTripPage> {
                             });
                             startTimer();
                         }
+                        else if(status == 'ontrip'){
+                          endTrip();
+                        }
                         },
                       ),
                     ),
@@ -432,7 +435,17 @@ class _NewTripPageState extends State<NewTripPage> {
       durationCounter++;
     });
   }
-  void endTrip(){
+  void endTrip() async{
     timer.cancel();
+    HelperMethods.showProgressDialog(context);
+    var currentLatLng = LatLng(myPosition.latitude, myPosition.longitude);
+    var directionDetails = await HelperMethods.getDirectionDetails(widget.tripDetails.pickup,
+        widget.tripDetails.destination);
+    Navigator.pop(context);
+    int fares = HelperMethods.estimateFares(directionDetails, durationCounter);
+    rideRef.child('fares').set(fares.toString());
+    rideRef.child('status').set('ended');
+    ridePositionStream.cancel();
+
   }
 }
