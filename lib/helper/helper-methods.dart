@@ -59,6 +59,17 @@ class HelperMethods {
     homeTabPositionStream.pause();
     Geofire.removeLocation(currentFirebaseUser.uid);
   }
+  static int estimateFares(DirectionDetails details) {
+    //per km = N5
+    //per minute = N10
+    //base fare = N40
+    double baseFare = 40;
+    double distanceFare = (details.distanceValue /1000) * 5;
+    double timeFare = (details.durationValue /60) * 10;
+
+    double totalFare = baseFare +distanceFare +timeFare;
+    return totalFare.truncate();
+  }
 
   static void enableHomeTabLocationUpdates() {
     homeTabPositionStream.resume();
