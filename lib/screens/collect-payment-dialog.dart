@@ -46,7 +46,7 @@ class CollectPayment extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'CircularStd',
                   fontSize: 50,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w500,
                   color:
                   Colors.black
               ),
@@ -64,7 +64,7 @@ class CollectPayment extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 60,),
             Container(
               width: 230,
               child: CustomCircularButtonMain(
@@ -78,7 +78,7 @@ class CollectPayment extends StatelessWidget {
                 isLoading: false,
                 text: (paymentMethod == 'cash') ?"COLLECT CASH": 'CONFIRM',
                 backgroundColor: BrandColors.colorGreen,
-                textColor: Colors.black,
+                textColor: Colors.white,
               ),
             ),
             SizedBox(height: 40,)

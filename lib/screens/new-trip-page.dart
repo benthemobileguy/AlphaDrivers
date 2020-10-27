@@ -194,6 +194,7 @@ class _NewTripPageState extends State<NewTripPage> {
                         isLoading: false,
                         backgroundColor: buttonColor,
                         onPressed: () async {
+                          print(status);
                           if (status == 'accepted') {
                             status = 'arrived';
                             rideRef.child('status').set(('arrived'));
@@ -206,7 +207,7 @@ class _NewTripPageState extends State<NewTripPage> {
                             HelperMethods.showProgressDialog(context);
                             Navigator.pop(context);
                           } else if (status == 'arrived') {
-                            status == 'ontrip';
+                            status = 'ontrip';
                             rideRef.child('status').set('ontrip');
                             setState(() {
                               buttonTitle = 'END TRIP';
@@ -442,7 +443,7 @@ class _NewTripPageState extends State<NewTripPage> {
     HelperMethods.showProgressDialog(context);
     var currentLatLng = LatLng(myPosition.latitude, myPosition.longitude);
     var directionDetails = await HelperMethods.getDirectionDetails(
-        widget.tripDetails.pickup, widget.tripDetails.destination);
+        widget.tripDetails.pickup, currentLatLng);
     Navigator.pop(context);
     int fares = HelperMethods.estimateFares(directionDetails, durationCounter);
     rideRef.child('fares').set(fares.toString());
