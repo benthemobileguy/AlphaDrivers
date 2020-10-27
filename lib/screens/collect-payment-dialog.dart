@@ -23,6 +23,7 @@ class CollectPayment extends StatelessWidget {
           borderRadius: BorderRadius.circular(4)
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
              SizedBox(height: 20,),
             Text(
