@@ -79,7 +79,8 @@ if(snapshot.value !=null){
   tripDetails.rideId  = rideId;
   tripDetails.pickupAddress = pickupAddress;
   tripDetails.destinationAddress = destinationAddress;
-  tripDetails.pickup = LatLng(destinationLat, destinationLng);
+  tripDetails.pickup = LatLng(pickupLat, pickupLng);
+  tripDetails.destination = LatLng(destinationLat, destinationLng);
   tripDetails.paymentMethod = paymentMethod;
   showDialog(context: context,
       barrierDismissible: false,
