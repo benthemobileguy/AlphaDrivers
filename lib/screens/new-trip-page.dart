@@ -432,4 +432,7 @@ class _NewTripPageState extends State<NewTripPage> {
       durationCounter++;
     });
   }
+  void endTrip(){
+    timer.cancel();
+  }
 }
