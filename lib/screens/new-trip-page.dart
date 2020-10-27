@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/helper/map-kit-helper.dart';
+import 'package:alpha_drivers/screens/collect-payment-dialog.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -446,6 +447,13 @@ class _NewTripPageState extends State<NewTripPage> {
     rideRef.child('fares').set(fares.toString());
     rideRef.child('status').set('ended');
     ridePositionStream.cancel();
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) =>
+          CollectPayment(paymentMethod: widget.tripDetails.paymentMethod,
+          fares: fares,),
+    );
 
   }
 }
