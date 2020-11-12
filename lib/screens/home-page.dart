@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: 135,
-            color: Colors.brown,
+            color: Colors.white,
           ), //Container
           Positioned(
             top: 40,
