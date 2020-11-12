@@ -6,7 +6,7 @@ class MainBloc with
     ChangeNotifier,
     LocationBloc{
   String _bearerToken;
-
+  String earnings = '0';
   String get bearerToken {
     return _bearerToken;
   }
@@ -14,5 +14,8 @@ class MainBloc with
   set bearerToken(token) {
     _bearerToken = token;
   }
-
+void updateEarnings(String newEarnings){
+   earnings = newEarnings;
+   notifyListeners();
+}
 }
