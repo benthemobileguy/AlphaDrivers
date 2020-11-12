@@ -1,10 +1,7 @@
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/screens/components/brand-divider.dart';
+import 'package:alpha_drivers/screens/components/history-tile.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
-import 'package:cabdriver/brand_colors.dart';
-import 'package:cabdriver/dataprovider.dart';
-import 'package:cabdriver/widgets/BrandDivier.dart';
-import 'package:cabdriver/widgets/HistoryTile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
