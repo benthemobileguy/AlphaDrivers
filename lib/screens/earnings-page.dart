@@ -44,7 +44,9 @@ class EarningsPage extends StatelessWidget {
 
         ),
 
-        BrandDivider(),
+        Divider(
+          color: Colors.black.withOpacity(0.5),
+        ),
 
       ],
     );
