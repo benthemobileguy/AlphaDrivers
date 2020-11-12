@@ -73,6 +73,8 @@ if(snapshot.value !=null){
   double destinationLng = double.parse(snapshot.value['destination']['longitude'].toString());
   String destinationAddress = snapshot.value['destination_address'].toString();
   String paymentMethod = snapshot.value['payment_method'].toString();
+  String riderName = snapshot.value['rider_name'];
+  String riderPhone = snapshot.value['rider_phone'];
   print(pickupAddress);
 
   TripDetails tripDetails = TripDetails();
@@ -82,6 +84,8 @@ if(snapshot.value !=null){
   tripDetails.pickup = LatLng(pickupLat, pickupLng);
   tripDetails.destination = LatLng(destinationLat, destinationLng);
   tripDetails.paymentMethod = paymentMethod;
+  tripDetails.riderName = riderName;
+  tripDetails.riderPhone = riderPhone;
   showDialog(context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => NotificationDialog(

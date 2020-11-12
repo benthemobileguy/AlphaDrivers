@@ -3,7 +3,7 @@ import 'package:alpha_drivers/helper/math-converter.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 
-import 'components/custom-circular-button-main.dart';
+import 'custom-circular-button-main.dart';
 class CollectPayment extends StatelessWidget {
   final String paymentMethod;
   final int fares;
@@ -42,10 +42,10 @@ class CollectPayment extends StatelessWidget {
             ),
             SizedBox(height: 16,),
             Text(
-              '\N${MathConverter.intToHundred(fares)}',
+              '\u{20A6}${MathConverter.intToHundred(fares)}',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: 'CircularStd',
+                  fontFamily: 'Montserrat',
                   fontSize: 50,
                   fontWeight: FontWeight.w500,
                   color:

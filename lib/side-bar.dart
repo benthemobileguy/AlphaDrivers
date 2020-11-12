@@ -76,8 +76,8 @@ class NavDrawer extends StatelessWidget {
 
         ),
         SideListTile(
-          title: "Summary",
-          leadingIcon: Icon(Mdi.carConnected,
+          title: "Earnings",
+          leadingIcon: Icon(Mdi.currencyNgn,
             color: HexColor("#817889"),),
           onPressed: null,
 

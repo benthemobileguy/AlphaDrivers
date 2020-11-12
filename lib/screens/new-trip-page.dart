@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/helper/map-kit-helper.dart';
-import 'package:alpha_drivers/screens/collect-payment-dialog.dart';
+import 'package:alpha_drivers/screens/components/collect-payment-dialog.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -90,7 +90,7 @@ class _NewTripPageState extends State<NewTripPage> {
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: BorderRadius. only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular((15))),
                   boxShadow: [
@@ -106,121 +106,123 @@ class _NewTripPageState extends State<NewTripPage> {
                   ]),
               height: Platform.isIOS ? 208 : 255,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      durationString,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'CircularStd',
-                        color: BrandColors.colorAccentPurple,
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        durationString,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'CircularStd',
+                          color: BrandColors.colorAccentPurple,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Daniel Jones',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'CircularStd'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Icon(Icons.call),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Image.asset(
-                          'images/pickicon.png',
-                          height: 16,
-                          width: 16,
-                        ),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        Expanded(
-                          child: Container(
-                              child: Text(
-                                widget.tripDetails.pickupAddress,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            widget.tripDetails.riderName,
                             style: TextStyle(
-                                fontSize: 16, fontFamily: 'CircularStd'),
-                          )),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Image.asset(
-                          'images/desticon.png',
-                          height: 16,
-                          width: 16,
-                        ),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        Expanded(
-                            child: Container(
-                          child: Text(widget.tripDetails.destinationAddress,
-                              style: TextStyle(
-                                  fontSize: 16, fontFamily: 'CircularStd')),
-                        )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    SizedBox(
-                      child: CustomCircularButtonMain(
-                        text: buttonTitle,
-                        fontWeight: FontWeight.w500,
-                        textColor: Colors.white,
-                        isLoading: false,
-                        backgroundColor: buttonColor,
-                        onPressed: () async {
-                          print(status);
-                          if (status == 'accepted') {
-                            status = 'arrived';
-                            rideRef.child('status').set(('arrived'));
-                            setState(() {
-                              buttonTitle = 'START TRIP';
-                              buttonColor = BrandColors.colorAccentPurple;
-                            });
-                            await getDirection(widget.tripDetails.pickup,
-                                widget.tripDetails.destination);
-                            HelperMethods.showProgressDialog(context);
-                            Navigator.pop(context);
-                          } else if (status == 'arrived') {
-                            status = 'ontrip';
-                            rideRef.child('status').set('ontrip');
-                            setState(() {
-                              buttonTitle = 'END TRIP';
-                              buttonColor = Colors.red[900];
-                            });
-                            startTimer();
-                          } else if (status == 'ontrip') {
-                            endTrip();
-                          }
-                        },
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'CircularStd'),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.call),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Image.asset(
+                            'images/pickicon.png',
+                            height: 16,
+                            width: 16,
+                          ),
+                          SizedBox(
+                            width: 18,
+                          ),
+                          Expanded(
+                            child: Container(
+                                child: Text(
+                                  widget.tripDetails.pickupAddress,
+                              style: TextStyle(
+                                  fontSize: 16, fontFamily: 'CircularStd'),
+                            )),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Image.asset(
+                            'images/desticon.png',
+                            height: 16,
+                            width: 16,
+                          ),
+                          SizedBox(
+                            width: 18,
+                          ),
+                          Expanded(
+                              child: Container(
+                            child: Text(widget.tripDetails.destinationAddress,
+                                style: TextStyle(
+                                    fontSize: 16, fontFamily: 'CircularStd')),
+                          )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        child: CustomCircularButtonMain(
+                          text: buttonTitle,
+                          fontWeight: FontWeight.w500,
+                          textColor: Colors.white,
+                          isLoading: false,
+                          backgroundColor: buttonColor,
+                          onPressed: () async {
+                            print(status);
+                            if (status == 'accepted') {
+                              status = 'arrived';
+                              rideRef.child('status').set(('arrived'));
+                              setState(() {
+                                buttonTitle = 'START TRIP';
+                                buttonColor = BrandColors.colorAccentPurple;
+                              });
+                              await getDirection(widget.tripDetails.pickup,
+                                  widget.tripDetails.destination);
+                              HelperMethods.showProgressDialog(context);
+                              Navigator.pop(context);
+                            } else if (status == 'arrived') {
+                              status = 'ontrip';
+                              rideRef.child('status').set('ontrip');
+                              setState(() {
+                                buttonTitle = 'END TRIP';
+                                buttonColor = Colors.red[900];
+                              });
+                              startTimer();
+                            } else if (status == 'ontrip') {
+                              endTrip();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -355,6 +357,10 @@ class _NewTripPageState extends State<NewTripPage> {
       'longitude': currentPos.longitude.toString()
     };
     rideRef.child('driver_location').set(locationMap);
+    DatabaseReference historyRef = FirebaseDatabase().reference()
+        .child('drivers/${currentFirebaseUser.uid}/history/$rideId');
+    historyRef.set(true);
+
   }
 
   void createMarker() {
