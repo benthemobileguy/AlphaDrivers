@@ -1,4 +1,5 @@
 import 'package:alpha_drivers/bloc/default.dart';
+import 'package:alpha_drivers/screens/history-page.dart';
 import 'package:alpha_drivers/theme/brand_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,10 @@ class EarningsPage extends StatelessWidget {
                 Image.asset('images/taxi.png', width: 70,),
                 SizedBox(width: 16,),
                 Text('Trips', style: TextStyle(fontSize: 16), ),
-                Expanded(child: Container(child: Text(Provider.of<MainBloc>(context).tripCount.toString(), textAlign: TextAlign.end, style: TextStyle(fontSize: 18),))),
+                Expanded(child: Container(child:
+                Text(Provider.of<MainBloc>(context).tripCount.toString(),
+                  textAlign: TextAlign.end,
+                  style: TextStyle(fontSize: 18),))),
               ],
             ),
           ),
