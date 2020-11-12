@@ -1,4 +1,6 @@
 import 'package:alpha_drivers/screens/components/side-list-tile.dart';
+import 'package:alpha_drivers/screens/earnings-page.dart';
+import 'package:alpha_drivers/screens/sign-in-page.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:alpha_drivers/utils/constants.dart';
@@ -79,7 +81,11 @@ class NavDrawer extends StatelessWidget {
           title: "Earnings",
           leadingIcon: Icon(Mdi.currencyNgn,
             color: HexColor("#817889"),),
-          onPressed: null,
+          onPressed: (){
+            Navigator.pushReplacement(
+                context, SlideFromLeftPageRoute(widget:
+            EarningsPage()));
+          },
 
         ),
         SideListTile(
@@ -120,6 +126,12 @@ class NavDrawer extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: ListTile(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context, SlideFromLeftPageRoute(widget:
+                  SignInPage()));
+
+                },
                   leading: Icon(Mdi.logout,
                     color: primaryColor,),
                   title: Text(
