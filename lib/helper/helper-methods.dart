@@ -1,6 +1,7 @@
 import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/datamodels/direction-details.dart';
 import 'package:alpha_drivers/helper/request-helper.dart';
+import 'package:alpha_drivers/model/history.dart';
 import 'package:alpha_drivers/model/user.dart';
 import 'package:alpha_drivers/screens/components/progress-dialog.dart';
 import 'package:alpha_drivers/utils/global-variables.dart';
@@ -110,7 +111,9 @@ class HelperMethods {
         Provider.of<MainBloc>(context, listen: false).updateTripCount(tripCount);
 
         List<String> tripHistoryKeys = [];
-        values.forEach((key, value) {tripHistoryKeys.add(key);});
+        values.forEach((key, value) {
+          tripHistoryKeys.add(key);
+        });
 
         // update trip keys to data provider
         Provider.of<MainBloc>(context, listen: false).updateTripKeys(tripHistoryKeys);
