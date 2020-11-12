@@ -1,4 +1,4 @@
-import '';
+import 'package:flutter/material.dart';
 class EarningsPage extends StatefulWidget {
   @override
   _EarningsPageState createState() => _EarningsPageState();
