@@ -37,7 +37,7 @@ class EarningsPage extends StatelessWidget {
                 Image.asset('images/taxi.png', width: 70,),
                 SizedBox(width: 16,),
                 Text('Trips', style: TextStyle(fontSize: 16), ),
-                Expanded(child: Container(child: Text(Provider.of<AppData>(context).tripCount.toString(), textAlign: TextAlign.end, style: TextStyle(fontSize: 18),))),
+                Expanded(child: Container(child: Text(Provider.of<MainBloc>(context).tripCount.toString(), textAlign: TextAlign.end, style: TextStyle(fontSize: 18),))),
               ],
             ),
           ),
