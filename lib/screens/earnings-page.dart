@@ -1,3 +1,4 @@
+import '';
 class EarningsPage extends StatefulWidget {
   @override
   _EarningsPageState createState() => _EarningsPageState();
