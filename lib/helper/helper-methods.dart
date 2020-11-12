@@ -137,13 +137,24 @@ class HelperMethods {
         if(snapshot.value != null){
 
           var history = History.fromSnapshot(snapshot);
-          Provider.of<MainBloc>(context, listen: false).updateTripHistory(history);
+          Provider.of<MainBloc>(context, listen: false)
+              .updateTripHistory(history);
 
           print(history.destination);
         }
       });
     }
 
+  }
+
+  static String formatMyDate(String datestring){
+
+    DateTime thisDate = DateTime.parse(datestring);
+    String formattedDate = '${DateFormat.MMMd().format(thisDate)},'
+        ' ${DateFormat.y().format(thisDate)} '
+        '- ${DateFormat.jm().format(thisDate)}';
+
+    return formattedDate;
   }
 
 
