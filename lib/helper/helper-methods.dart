@@ -123,4 +123,25 @@ class HelperMethods {
 
   }
 
+  static void getHistoryData(context){
+
+    var keys = Provider.of<MainBloc>(context, listen: false).tripHistoryKeys;
+
+    for(String key in keys){
+      DatabaseReference historyRef = FirebaseDatabase.instance.reference().child('RideRequest/$key');
+
+      historyRef.once().then((DataSnapshot snapshot) {
+        if(snapshot.value != null){
+
+          var history = History.fromSnapshot(snapshot);
+          Provider.of<MainBloc>(context, listen: false).updateTripHistory(history);
+
+          print(history.destination);
+        }
+      });
+    }
+
+  }
+
+
 }

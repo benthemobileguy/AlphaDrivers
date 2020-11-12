@@ -1,21 +1,24 @@
 import 'package:alpha_drivers/bloc/location/index.dart';
 import 'package:flutter/material.dart';
 
-
-class MainBloc with
-    ChangeNotifier,
-    LocationBloc{
-  String _bearerToken;
+class MainBloc with ChangeNotifier, LocationBloc {
   String earnings = '0';
-  String get bearerToken {
-    return _bearerToken;
+  int tripCount = 0;
+  List<String> tripHistoryKeys = [];
+
+  void updateEarnings(String newEarnings){
+    earnings = newEarnings;
+    notifyListeners();
   }
 
-  set bearerToken(token) {
-    _bearerToken = token;
+  void updateTripCount(int newTripCount){
+    tripCount = newTripCount;
+    notifyListeners();
   }
-void updateEarnings(String newEarnings){
-   earnings = newEarnings;
-   notifyListeners();
-}
+
+  void updateTripKeys(List<String> newKeys){
+    tripHistoryKeys = newKeys;
+    notifyListeners();
+  }
+
 }

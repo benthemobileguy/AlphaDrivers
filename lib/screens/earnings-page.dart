@@ -18,7 +18,9 @@ class EarningsPage extends StatelessWidget {
               children: [
 
                 Text('Total Earnings', style: TextStyle(color: Colors.white),),
-                Text('\$${Provider.of<MainBloc>(context).earnings}', style: TextStyle(color: Colors.white, fontSize: 40, fontFamily: 'Brand-Bold'),)
+                Text('\u{20A6}${Provider.of<MainBloc>(context).earnings}',
+                  style: TextStyle(color: Colors.white, fontSize: 40,
+                      fontFamily: 'Montserrat'),)
               ],
             ),
           ),
@@ -27,7 +29,9 @@ class EarningsPage extends StatelessWidget {
         FlatButton(
           padding: EdgeInsets.all(0),
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> HistoryPage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)
+                => HistoryPage()));
           },
 
           child: Padding(

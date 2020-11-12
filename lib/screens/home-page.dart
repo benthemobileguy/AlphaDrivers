@@ -225,6 +225,7 @@ void getCurrentDriverInfo() async{
     PushNotificationService pushNotificationService = PushNotificationService();
     pushNotificationService.initialize(context);
     pushNotificationService.getToken();
+    HelperMethods.getHistoryInfo(context);
 }
   void goOnline() {
     print(currentFirebaseUser.uid);
