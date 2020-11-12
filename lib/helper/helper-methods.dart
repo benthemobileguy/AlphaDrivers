@@ -1,7 +1,7 @@
 import 'dart:math';
+import 'package:alpha_drivers/bloc/default.dart';
 import 'package:alpha_drivers/datamodels/direction-details.dart';
 import 'package:alpha_drivers/helper/request-helper.dart';
-import 'package:alpha_drivers/utils/global-variables.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
@@ -126,7 +126,7 @@ class HelperMethods{
         if(snapshot.value != null){
 
           var history = History.fromSnapshot(snapshot);
-          Provider.of<AppData>(context, listen: false).updateTripHistory(history);
+          Provider.of<MainBloc>(context, listen: false).updateTripHistory(history);
 
           print(history.destination);
         }
