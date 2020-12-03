@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   var availabilityText = 'GO ONLINE';
   Color availabilityColorBg = Colors.white;
-  Color availabilityColorText = Colors.brown;
+  Color availabilityColorText = Colors.green;
   bool isAvailable = false;
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: 135,
-            color: Colors.white,
+            color: Colors.grey.withOpacity(0.6),
           ), //Container
           Positioned(
             top: 40,
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                                   //reset header state
                                   setState(() {
                                     availabilityColorBg = Colors.white;
-                                    availabilityColorText = Colors.brown;
+                                    availabilityColorText = Colors.green;
                                     availabilityText = 'GO ONLINE';
                                     isAvailable = false;
                                   });
