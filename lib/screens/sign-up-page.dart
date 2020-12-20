@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:alpha_drivers/animations/fade-animations.dart';
+import 'package:alpha_drivers/animations/route_animations/slide_from_left_page_route.dart';
 import 'package:alpha_drivers/animations/route_animations/slide_from_right_page_route.dart';
 import 'package:alpha_drivers/screens/components/default-text-form-field.dart';
 import 'package:alpha_drivers/screens/register-driver.dart';
+import 'package:alpha_drivers/screens/welcome.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/constants.dart';
 import 'package:alpha_drivers/utils/network-utils.dart';
@@ -40,7 +42,8 @@ class _SignUpPageState extends State<SignUpPage> {
         margin: EdgeInsets.only(top: 25),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("images/bg_welcome.png"), fit: BoxFit.cover)),
+                image: AssetImage("images/bg_welcome.png"),
+                fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: primaryColor.withOpacity(0.8),
           body:  SingleChildScrollView(
@@ -59,7 +62,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       icon: Icon(Mdi.close,
                           color: Colors.white),
                       onPressed: () {
-                      Navigator.pop(context);
+                        Navigator.pushReplacement(context,
+                            SlideFromLeftPageRoute
+                              (widget: WelcomeScreen()));
                       },
                     ),
                   ),

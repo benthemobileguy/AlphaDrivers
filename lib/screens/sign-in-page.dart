@@ -34,169 +34,174 @@ class _SignInPageState extends State<SignInPage> {
                 image: AssetImage("images/bg_welcome.png"), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: primaryColor.withOpacity(0.8),
-          body:  Padding(
-            padding: const EdgeInsets.only(top: 80),
-            child: SingleChildScrollView(
-              child: Form(
-                autovalidate: false,
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    FadeAnimation(
-                      0.6,
-                    Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "ALPHA\nDRIVERS",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontFamily: 'CircularStd',
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    FadeAnimation(
-                      0.6,
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20),
-                                  topRight: Radius.circular(20))),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20,
-                                      bottom: 10,
-                                      left: 20,
-                                      right: 20),
-                                  child: DefaultTextFormField(
-                                    validator: (value) {
-                                      if (!EmailValidator.validate(
-                                          value.trim())) {
-                                        return 'Please enter a valid email';
-                                      }
-                                      return null;
-                                    },
-                                    controller: _emailController,
-                                    prefixIcon: Icon(
-                                      Icons.email,
-                                      color: Colors.grey,
-                                    ),
-                                    hintText: "Email",
-
-                                  )
-                                ),
-                                Padding(
-                                    padding: const EdgeInsets.only(top: 20,
-                                        bottom: 10,
-                                        left: 20,
-                                        right: 20),
-                                    child: DefaultTextFormField(
-                                      validator: (value) {
-                                        if (value.isEmpty ||
-                                            value.length < 5) {
-                                          return 'Password must be at least 5 characters';
-                                        }
-                                        return null;
-                                      },
-                                      controller: _passController,
-                                      prefixIcon: Icon(
-                                        Icons.lock,
-                                        color: Colors.grey,
-                                      ),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            _showPassword =
-                                            !_showPassword;
-                                          });
-                                        },
-                                        child: _showPassword? Icon(
-                                          Icons.visibility,
-                                          color: Colors.grey,
-                                        ): Icon(
-                                          Icons.visibility_off,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      obscureText: !_showPassword,
-                                      hintText: "Password",
-
-                                    )
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                )
-                              ],
-                            ),
-                          ),
-
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left:17, right: 17),
+          body:  SingleChildScrollView(
+            child: Form(
+              autovalidate: false,
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 70,
+                  ),
+                  FadeAnimation(
+                    0.6,
+                  Align(
+                      alignment: Alignment.center,
                       child: Text(
-                        "By continuing, I confirm that i have read & agree to the "
-                            "Terms & conditions and Privacy policy",
+                        "ALPHA\nDRIVERS",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 30.0,
                           fontFamily: 'CircularStd',
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 35,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomCircularButtonMain(
-                        onPressed: (){
-                          submitForm();
-                        },
-                        fontWeight: FontWeight.w700,
-                        isLoading: isLoading,
-                        text: "Sign In",
-                        backgroundColor: Colors.white,
-                        textColor: primaryColor,
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  FadeAnimation(
+                    0.6,
+                    Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                topRight: Radius.circular(20))),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                    right: 10,
+                                    top: 20,
+                                    bottom: 10,),
+                                child: DefaultTextFormField(
+                                  validator: (value) {
+                                    if (!EmailValidator.validate(
+                                        value.trim())) {
+                                      return 'Please enter a valid email';
+                                    }
+                                    return null;
+                                  },
+                                  controller: _emailController,
+                                  prefixIcon: Icon(
+                                    Icons.email,
+                                    color: Colors.grey,
+                                  ),
+                                  hintText: "Email",
+
+                                )
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 10,
+                                    right: 10,
+                                    top: 20,
+                                    bottom: 10,),
+                                  child: DefaultTextFormField(
+                                    validator: (value) {
+                                      if (value.isEmpty ||
+                                          value.length < 5) {
+                                        return 'Password must be at least 5 characters';
+                                      }
+                                      return null;
+                                    },
+                                    controller: _passController,
+                                    prefixIcon: Icon(
+                                      Icons.lock,
+                                      color: Colors.grey,
+                                    ),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _showPassword =
+                                          !_showPassword;
+                                        });
+                                      },
+                                      child: _showPassword? Icon(
+                                        Icons.visibility,
+                                        color: Colors.grey,
+                                      ): Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    obscureText: !_showPassword,
+                                    hintText: "Password",
+
+                                  )
+                              ),
+                              SizedBox(
+                                height: 50,
+                              )
+                            ],
+                          ),
+                        ),
+
                       ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomCircularButtonMain(
-                        onPressed: (){
-                          Navigator.pushReplacement(
-                              context, SlideFromLeftPageRoute(widget:
-                          SignUpPage()));
-                        },
-                        isLoading: false,
-                        backgroundColor: Colors.transparent,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:17, right: 17),
+                    child: Text(
+                      "By continuing, I confirm that i have read & agree to the "
+                          "Terms & conditions and Privacy policy",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'CircularStd',
+                        color: Colors.white,
                         fontWeight: FontWeight.w700,
-                        textColor: Colors.white,
-                        text: "Sign Up",
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 35,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomCircularButtonMain(
+                      onPressed: (){
+                        submitForm();
+                      },
+                      fontWeight: FontWeight.w700,
+                      isLoading: isLoading,
+                      text: "Sign In",
+                      backgroundColor: Colors.white,
+                      textColor: primaryColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomCircularButtonMain(
+                      onPressed: (){
+                        Navigator.pushReplacement(
+                            context, SlideFromLeftPageRoute(widget:
+                        SignUpPage()));
+                      },
+                      isLoading: false,
+                      backgroundColor: Colors.transparent,
+                      fontWeight: FontWeight.w700,
+                      textColor: Colors.white,
+                      text: "Sign Up",
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
           ),
