@@ -20,5 +20,6 @@ class BarChartEarnings extends StatelessWidget {
             earnings.barColor
       )
     ];
+     return charts.BarChart(series, animate: true,);
   }
 }
