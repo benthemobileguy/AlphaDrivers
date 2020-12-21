@@ -1,5 +1,5 @@
 import 'package:alpha_drivers/screens/components/side-list-tile.dart';
-import 'package:alpha_drivers/screens/contact-us-page.dart';
+import 'package:alpha_drivers/screens/help-page.dart';
 import 'package:alpha_drivers/screens/earnings-page.dart';
 import 'package:alpha_drivers/screens/my-subscription-page.dart';
 import 'package:alpha_drivers/screens/notifications-page.dart';
@@ -126,13 +126,13 @@ class NavDrawer extends StatelessWidget {
 
         ),
         SideListTile(
-          title: "Contact Us",
-          leadingIcon: Icon(Mdi.informationOutline,
+          title: "Help",
+          leadingIcon: Icon(Mdi.help,
             color: HexColor("#817889"),),
           onPressed:(){
             Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
-            ContactUsPage()));
+            HelpPage()));
           },
 
         ),

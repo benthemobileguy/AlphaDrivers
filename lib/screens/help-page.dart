@@ -1,12 +1,12 @@
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:mdi/mdi.dart';
-class SettingsPage extends StatefulWidget {
+class HelpPage extends StatefulWidget {
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _ContactUsPageState createState() => _ContactUsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _ContactUsPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         elevation: 1,
         backgroundColor: Colors.white,
-        title: Text('Earnings',
+        title: Text('Help',
             style: TextStyle(
               color: HexColor("#282F39"),
               fontWeight: FontWeight.w700,
@@ -37,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
             contentPadding: EdgeInsets.all(10),
             leading: Icon(Icons.emoji_people),
             title:Text(
-              "Profile",
+              "Terms & Conditions",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -57,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
             contentPadding: EdgeInsets.all(10),
             leading: Icon(Mdi.car),
             title:Text(
-              "My Vehicle",
+              "Privacy Policies",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
             contentPadding: EdgeInsets.all(10),
             leading: Icon(Mdi.fileDocument),
             title:Text(
-              "Personal Document",
+              "About",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -93,46 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
             color: Colors.grey.withOpacity(0.5),
             height: 1,
           ),
-          ListTile(
-            contentPadding: EdgeInsets.all(10),
-            leading: Icon(Mdi.bank),
-            title:Text(
-              "Bank Details",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-                color: HexColor("#241332"),
-              ),
-            ),
-            onTap:(){
 
-            },
-          ),
-          Divider(
-            color: Colors.grey.withOpacity(0.5),
-            height: 1,
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.all(10),
-            leading: Icon(Mdi.onepassword),
-            title:Text(
-              "Change Password",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-                color: HexColor("#241332"),
-              ),
-            ),
-            onTap:(){
-
-            },
-          ),
-          Divider(
-            color: Colors.grey.withOpacity(0.5),
-            height: 1,
-          ),
         ],
       ),
     );
