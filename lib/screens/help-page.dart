@@ -35,7 +35,7 @@ class _ContactUsPageState extends State<HelpPage> {
         children: [
           ListTile(
             contentPadding: EdgeInsets.all(10),
-            leading: Icon(Icons.emoji_people),
+            leading: Icon(Mdi.fileDocument),
             title:Text(
               "Terms & Conditions",
               style: TextStyle(
@@ -55,7 +55,7 @@ class _ContactUsPageState extends State<HelpPage> {
           ),
           ListTile(
             contentPadding: EdgeInsets.all(10),
-            leading: Icon(Mdi.car),
+            leading: Icon(Mdi.fileDocumentOutline),
             title:Text(
               "Privacy Policies",
               style: TextStyle(
