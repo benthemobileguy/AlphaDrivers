@@ -1,12 +1,19 @@
+import 'package:alpha_drivers/model/earnings-chart.dart';
 import 'package:alpha_drivers/screens/components/custom-balance.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 class WeeklyEarningsTab extends StatefulWidget {
   @override
   _WeeklyEarningsTabState createState() => _WeeklyEarningsTabState();
 }
 
 class _WeeklyEarningsTabState extends State<WeeklyEarningsTab> {
+final List<EarningsChart> data = [
+  EarningsChart(day :"Monday",
+      barColor:
+charts.ColorUtil.fromDartColor(Colors.blue)),
+];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +23,7 @@ class _WeeklyEarningsTabState extends State<WeeklyEarningsTab> {
           SizedBox(
             height: 20,
           ),
+
           Center(
             child: Text(
               "Mon. 27th July 2020",
@@ -38,6 +46,7 @@ class _WeeklyEarningsTabState extends State<WeeklyEarningsTab> {
           SizedBox(
             height: 20,
           ),
+
           Divider(
             color: dividerColor,
             thickness: 1,
