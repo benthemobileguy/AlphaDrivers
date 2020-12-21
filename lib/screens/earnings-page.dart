@@ -35,7 +35,7 @@ class _EarningsPageState extends State<EarningsPage> with
               Navigator.pop(context);
             },
           ),
-          elevation: 0,
+          elevation: 1,
           backgroundColor: Colors.white,
           title: Text('Earnings',
               style: TextStyle(
