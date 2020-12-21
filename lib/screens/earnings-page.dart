@@ -43,42 +43,39 @@ class _EarningsPageState extends State<EarningsPage> with
                 fontWeight: FontWeight.w700,
                 fontFamily: 'CircularStd',)),
         ),
-        body:  Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              TabBar(
-                controller: _tabController,
-                indicatorWeight: 4,
-                indicatorPadding: EdgeInsets.only(bottom: -10),
-                indicatorColor: customGreenText,
-                tabs: <Widget>[
-                  Text(
-                    "TODAY",
-                    style: TextStyle(
-                      fontSize: 14.5,
-                      fontFamily: 'CircularStd',
-                      color: customGreenText,
-                      fontWeight: FontWeight.w300,
-                    ),
+        body:  Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              indicatorWeight: 4,
+              indicatorPadding: EdgeInsets.only(bottom: -10),
+              indicatorColor: customGreenText,
+              tabs: <Widget>[
+                Text(
+                  "TODAY",
+                  style: TextStyle(
+                    fontSize: 14.5,
+                    fontFamily: 'CircularStd',
+                    color: customGreenText,
+                    fontWeight: FontWeight.w300,
                   ),
-                  Text(
-                    "WEEKLY",
-                    style: TextStyle(
-                      fontSize: 14.5,
-                      fontFamily: 'CircularStd',
-                      color: customGreenText,
-                      fontWeight: FontWeight.w300,
-                    ),
+                ),
+                Text(
+                  "WEEKLY",
+                  style: TextStyle(
+                    fontSize: 14.5,
+                    fontFamily: 'CircularStd',
+                    color: customGreenText,
+                    fontWeight: FontWeight.w300,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              callPage()
-            ],
-          ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            callPage()
+          ],
         ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:alpha_drivers/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,10 +9,13 @@ class CustomBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(crossAxisAlignment: CrossAxisAlignment.start,
-
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SvgPicture.asset('assets/images/blacknaira.svg',
+        SvgPicture.asset(
+          'images/blacknaira.svg',
+          color: customGreenDark,
         ),
         Container(
             alignment: Alignment.topCenter,
@@ -28,9 +32,9 @@ class CustomBalance extends StatelessWidget {
                       text: '$balance.00',
                       style: TextStyle(
                           color: Color(0xFF1A1A1A),
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
                           fontFamily: 'Inter',
-                          fontSize: 16),
+                          fontSize: 22),
                     )
                   ]),
             )),
