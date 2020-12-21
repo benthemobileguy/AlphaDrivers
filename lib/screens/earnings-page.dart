@@ -1,62 +1,78 @@
-import 'package:alpha_drivers/bloc/default.dart';
-import 'package:alpha_drivers/screens/history-page.dart';
-import 'package:alpha_drivers/theme/brand_colors.dart';
+import 'package:alpha_drivers/theme/style.dart';
+import 'package:alpha_drivers/utils/color.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+class EarningsPage extends StatefulWidget {
+  @override
+  _EarningsPageState createState() => _EarningsPageState();
+}
 
-class EarningsPage extends StatelessWidget {
+class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMixin,
+    AutomaticKeepAliveClientMixin{
+  TabController _tabController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabController = new TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-
-        Container(
-          color: BrandColors.colorPrimary,
-          width: double.infinity,
-          child: Padding(
-            padding:  EdgeInsets.symmetric(vertical: 70),
-            child: Column(
-              children: [
-
-                Text('Total Earnings', style: TextStyle(color: Colors.white),),
-                Text('\u{20A6}${Provider.of<MainBloc>(context).earnings}',
-                  style: TextStyle(color: Colors.white, fontSize: 40,
-                      fontFamily: 'Montserrat'),)
-              ],
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 22,
             ),
+            color: HexColor("#CFD1D3"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Text('Make Payment',
+              style: TextStyle(
+                color: HexColor("#282F39"),
+                fontWeight: FontWeight.w700,
+                fontFamily: 'CircularStd',)),
         ),
-
-        FlatButton(
-          padding: EdgeInsets.all(0),
-          onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context)
-                => HistoryPage()));
-          },
-
-          child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 30, vertical: 18),
-            child: Row(
-              children: [
-                Image.asset('images/taxi.png', width: 70,),
-                SizedBox(width: 16,),
-                Text('Trips', style: TextStyle(fontSize: 16), ),
-                Expanded(child: Container(child:
-                Text(Provider.of<MainBloc>(context).tripCount.toString(),
-                  textAlign: TextAlign.end,
-                  style: TextStyle(fontSize: 18),))),
-              ],
+        body:  TabBar(
+          controller: _tabController,
+          indicatorWeight: 4,
+          indicatorPadding: EdgeInsets.only(bottom: -10),
+          indicatorColor: tabIndicatorColor,
+          tabs: <Widget>[
+            Text(
+              "Materials",
+              style: TextStyle(
+                fontSize: 16.0,
+                fontFamily: 'CircularStd',
+                color: HexColor("#FAF5FF"),
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-
+            Text(
+              "Workers",
+              style: TextStyle(
+                fontSize: 16.0,
+                fontFamily: 'CircularStd',
+                color: HexColor("#FAF5FF"),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
-
-        Divider(
-          color: Colors.black.withOpacity(0.5),
-        ),
-
-      ],
     );
   }
+
+  void _handleTabSelection() {
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
