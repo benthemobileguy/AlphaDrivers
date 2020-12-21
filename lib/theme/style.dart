@@ -2,6 +2,7 @@ import 'package:alpha_drivers/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 final Color primaryColor = Hexcolor("#1FCD6C");
+final Color textColor= HexColor("#7F7F7F");
 final Color primaryColorDark = Hexcolor("#000000");
 final Color customGreenText = HexColor("#1FCD6C");
 final Color bottomBarColor = Hexcolor("#090015");

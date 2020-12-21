@@ -1,3 +1,5 @@
+import 'package:alpha_drivers/tabs/today-earnings-tab.dart';
+import 'package:alpha_drivers/tabs/weekly-earnings-tab.dart';
 import 'package:alpha_drivers/theme/style.dart';
 import 'package:alpha_drivers/utils/color.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,8 @@ class EarningsPage extends StatefulWidget {
   _EarningsPageState createState() => _EarningsPageState();
 }
 
-class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMixin,
+class _EarningsPageState extends State<EarningsPage> with
+    TickerProviderStateMixin,
     AutomaticKeepAliveClientMixin{
   TabController _tabController;
   @override
@@ -34,37 +37,48 @@ class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMix
           ),
           elevation: 0,
           backgroundColor: Colors.white,
-          title: Text('Make Payment',
+          title: Text('Earnings',
               style: TextStyle(
                 color: HexColor("#282F39"),
                 fontWeight: FontWeight.w700,
                 fontFamily: 'CircularStd',)),
         ),
-        body:  TabBar(
-          controller: _tabController,
-          indicatorWeight: 4,
-          indicatorPadding: EdgeInsets.only(bottom: -10),
-          indicatorColor: tabIndicatorColor,
-          tabs: <Widget>[
-            Text(
-              "Materials",
-              style: TextStyle(
-                fontSize: 16.0,
-                fontFamily: 'CircularStd',
-                color: customGreenText,
-                fontWeight: FontWeight.w500,
+        body:  Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                indicatorWeight: 4,
+                indicatorPadding: EdgeInsets.only(bottom: -10),
+                indicatorColor: customGreenText,
+                tabs: <Widget>[
+                  Text(
+                    "TODAY",
+                    style: TextStyle(
+                      fontSize: 14.5,
+                      fontFamily: 'CircularStd',
+                      color: customGreenText,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Text(
+                    "WEEKLY",
+                    style: TextStyle(
+                      fontSize: 14.5,
+                      fontFamily: 'CircularStd',
+                      color: customGreenText,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Text(
-              "Workers",
-              style: TextStyle(
-                fontSize: 16.0,
-                fontFamily: 'CircularStd',
-                color: customGreenText,
-                fontWeight: FontWeight.w500,
+              SizedBox(
+                height: 20,
               ),
-            ),
-          ],
+              callPage()
+            ],
+          ),
         ),
     );
   }
@@ -76,4 +90,15 @@ class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMix
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  callPage() {
+    return Expanded(
+      child: TabBarView(
+          controller: _tabController,
+          children: [
+            new TodayEarningsTab(),
+            new WeeklyEarningsTab()
+          ]),
+    );
+  }
 }

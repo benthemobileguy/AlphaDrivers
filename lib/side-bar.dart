@@ -86,7 +86,7 @@ class NavDrawer extends StatelessWidget {
           leadingIcon: Icon(Mdi.currencyNgn,
             color: HexColor("#817889"),),
           onPressed: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
             EarningsPage()));
           },
@@ -97,7 +97,7 @@ class NavDrawer extends StatelessWidget {
           leadingIcon: Icon(Mdi.contactlessPaymentCircleOutline,
             color: HexColor("#817889"),),
           onPressed: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
             MySubcriptionPage()));
           },
@@ -108,7 +108,7 @@ class NavDrawer extends StatelessWidget {
           leadingIcon: Icon(Mdi.history,
             color: HexColor("#817889"),),
           onPressed: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
             NotificationsPage()));
           }
@@ -119,7 +119,7 @@ class NavDrawer extends StatelessWidget {
           leadingIcon: Icon(Mdi.informationOutline,
             color: HexColor("#817889"),),
           onPressed: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
             SettingsPage()));
           },
@@ -130,7 +130,7 @@ class NavDrawer extends StatelessWidget {
           leadingIcon: Icon(Mdi.informationOutline,
             color: HexColor("#817889"),),
           onPressed:(){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, SlideFromLeftPageRoute(widget:
             ContactUsPage()));
           },
@@ -147,7 +147,7 @@ class NavDrawer extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: ListTile(
                 onTap: (){
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context, SlideFromLeftPageRoute(widget:
                   SignInPage()));
 
