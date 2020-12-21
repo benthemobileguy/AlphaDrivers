@@ -51,7 +51,7 @@ class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMix
               style: TextStyle(
                 fontSize: 16.0,
                 fontFamily: 'CircularStd',
-                color: HexColor("#FAF5FF"),
+                color: customGreenText,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -60,7 +60,7 @@ class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMix
               style: TextStyle(
                 fontSize: 16.0,
                 fontFamily: 'CircularStd',
-                color: HexColor("#FAF5FF"),
+                color: customGreenText,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -70,6 +70,7 @@ class _EarningsPageState extends State<EarningsPage> with TickerProviderStateMix
   }
 
   void _handleTabSelection() {
+
   }
 
   @override

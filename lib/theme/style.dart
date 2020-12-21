@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 final Color primaryColor = Hexcolor("#1FCD6C");
 final Color primaryColorDark = Hexcolor("#000000");
+final Color customGreenText = HexColor("#1FCD6C");
 final Color bottomBarColor = Hexcolor("#090015");
 final Color bottomBarActiveColor = Hexcolor("#FCFCFC");
 final Color bottomBarDefaultColor = Hexcolor("#ECECEC");
