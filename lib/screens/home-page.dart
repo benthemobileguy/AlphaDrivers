@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                  boxShadow: [new BoxShadow(blurRadius: 2.0)],
+                  boxShadow: [new BoxShadow(blurRadius: 0.0)],
                   shape: BoxShape.circle,
                   color: Colors.white),
               child: IconButton(

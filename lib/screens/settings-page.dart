@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         elevation: 1,
         backgroundColor: Colors.white,
-        title: Text('Earnings',
+        title: Text('Settings',
             style: TextStyle(
               color: HexColor("#282F39"),
               fontWeight: FontWeight.w700,
