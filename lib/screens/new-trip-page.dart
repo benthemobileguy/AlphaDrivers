@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:alpha_drivers/datamodels/trip-details.dart';
 import 'package:alpha_drivers/helper/helper-methods.dart';
 import 'package:alpha_drivers/helper/map-kit-helper.dart';
@@ -28,7 +29,7 @@ class _NewTripPageState extends State<NewTripPage> {
 
   Timer timer;
   int durationCounter = 0;
-  String buttonTitle = 'ARRIVED';
+  String buttonTitle = 'I\'ve Arrived';
   Color buttonColor = BrandColors.colorGreen;
   Completer<GoogleMapController> _controller = Completer();
   double mapPaddingBottom = 0;
@@ -132,9 +133,14 @@ class _NewTripPageState extends State<NewTripPage> {
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'CircularStd'),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: Icon(Icons.call),
+                          GestureDetector(
+                            onTap: (){
+                              launchCaller();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Icon(Icons.call),
+                            ),
                           ),
                         ],
                       ),
@@ -480,5 +486,14 @@ class _NewTripPageState extends State<NewTripPage> {
         earningsRef.set(adjustedFares.toStringAsFixed(2));
       }
     });
+  }
+
+  void launchCaller() async {
+    var telNumber = "tel: ${'08100599608'}";
+    if (await canLaunch(telNumber)) {
+      await launch(telNumber);
+    } else {
+      throw 'could not launch $telNumber';
+    }
   }
 }

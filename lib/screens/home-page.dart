@@ -31,7 +31,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   MainBloc _mainBloc;
   var geolocator = Geolocator();
-  var locationOptions = LocationOptions(accuracy: LocationAccuracy.bestForNavigation,
+  CameraPosition cameraPosition;
+  var locationOptions =
+  LocationOptions(accuracy: LocationAccuracy.bestForNavigation,
       distanceFilter: 4);
   GoogleMapController mapController;
   TextEditingController textEditingController = new TextEditingController();
@@ -79,7 +81,8 @@ class _HomePageState extends State<HomePage> {
             mapType: MapType.normal,
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
-            initialCameraPosition: kGooglePlex,
+            initialCameraPosition: cameraPosition!=null?
+            cameraPosition: kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
               _getUserLocation();
@@ -209,7 +212,8 @@ class _HomePageState extends State<HomePage> {
     mapController = await _controller.future;
     //create a latlng object to navigate to
     LatLng pos = LatLng(position.latitude, position.longitude);
-    CameraPosition cameraPosition = new CameraPosition(target: pos, zoom: 14);
+    cameraPosition = new
+    CameraPosition(target: pos, zoom: 14);
     await mapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }

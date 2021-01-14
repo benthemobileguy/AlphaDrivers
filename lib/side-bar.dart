@@ -1,6 +1,7 @@
 import 'package:alpha_drivers/screens/components/side-list-tile.dart';
 import 'package:alpha_drivers/screens/help-page.dart';
 import 'package:alpha_drivers/screens/earnings-page.dart';
+import 'package:alpha_drivers/screens/home-page.dart';
 import 'package:alpha_drivers/screens/my-subscription-page.dart';
 import 'package:alpha_drivers/screens/notifications-page.dart';
 import 'package:alpha_drivers/screens/settings-page.dart';
@@ -78,7 +79,11 @@ class NavDrawer extends StatelessWidget {
           title: "Home",
           leadingIcon: Icon(Mdi.bankOutline,
             color: HexColor("#817889"),),
-          onPressed: null,
+          onPressed: (){
+            Navigator.pushReplacement(
+                context, SlideFromLeftPageRoute(widget:
+            HomePage()));
+          },
 
         ),
         SideListTile(
